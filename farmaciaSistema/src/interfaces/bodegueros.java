@@ -181,12 +181,10 @@ public class bodegueros extends javax.swing.JFrame {
             nombre = txtBodNombre.getText();
             apellido = txtBodApellido.getText();
             sueldo = txtBodSueldo.getText();
-            
             foto = "C:\\FOTOSFARMACIA\\"+txtBodCedula.getText()+".jpg";
-           
             // pasa la iamgen a c;\\Foto\\
             File archivoGuardar = new File (foto);       
-            gestion.GuardarImagen(archivoGuardar,bytesImg);
+            gestion.GuardarImagen(archivoGuardar,bytesImg); 
             
             
             sql="insert into bodegueros (ci_bod,nom_bod,ape_bod,sue_bod,foto_bod) values (?,?,?,?,?)";
