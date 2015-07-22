@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author javy
  */
-public class clientes extends javax.swing.JFrame {
+public class clientes extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form clientes

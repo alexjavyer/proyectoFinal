@@ -9,7 +9,7 @@ package interfaces;
  *
  * @author javy
  */
-public class ventas extends javax.swing.JFrame {
+public class ventas extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form clientes

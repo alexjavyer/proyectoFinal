@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author javy
  */
-public class visitadores_medicos extends javax.swing.JFrame {
+public class visitadores_medicos extends javax.swing.JInternalFrame {
 DefaultTableModel model;
     
     // mandar fotos

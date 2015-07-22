@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author javy
  */
-public class farmaceuticos extends javax.swing.JFrame {
+public class farmaceuticos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form farmaceuticos
