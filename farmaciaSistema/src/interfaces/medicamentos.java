@@ -9,7 +9,7 @@ package interfaces;
  *
  * @author javy
  */
-public class medicamentos extends javax.swing.JFrame {
+public class medicamentos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form clientes

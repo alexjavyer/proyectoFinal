@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author javy
  */
-public class bodegueros extends javax.swing.JFrame {
+public class bodegueros extends javax.swing.JInternalFrame {
     DefaultTableModel model;
     
     // mandar fotos
@@ -181,12 +181,10 @@ public class bodegueros extends javax.swing.JFrame {
             nombre = txtBodNombre.getText();
             apellido = txtBodApellido.getText();
             sueldo = txtBodSueldo.getText();
-            
             foto = "C:\\FOTOSFARMACIA\\"+txtBodCedula.getText()+".jpg";
-           
             // pasa la iamgen a c;\\Foto\\
             File archivoGuardar = new File (foto);       
-            gestion.GuardarImagen(archivoGuardar,bytesImg);
+            gestion.GuardarImagen(archivoGuardar,bytesImg); 
             
             
             sql="insert into bodegueros (ci_bod,nom_bod,ape_bod,sue_bod,foto_bod) values (?,?,?,?,?)";
@@ -443,6 +441,11 @@ public class bodegueros extends javax.swing.JFrame {
                 txtBodBusquedaFocusLost(evt);
             }
         });
+        txtBodBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBodBusquedaActionPerformed(evt);
+            }
+        });
         txtBodBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBodBusquedaKeyReleased(evt);
@@ -513,9 +516,10 @@ public class bodegueros extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(22, Short.MAX_VALUE)
+                        .addGap(0, 12, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,7 +527,6 @@ public class bodegueros extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(23, 23, 23))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnSubirFoto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -672,6 +675,10 @@ public class bodegueros extends javax.swing.JFrame {
         // TODO add your handling code here:
          cargarTabla(txtBodBusqueda.getText());
     }//GEN-LAST:event_txtBodBusquedaKeyReleased
+
+    private void txtBodBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBodBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBodBusquedaActionPerformed
 
     /**
      * @param args the command line arguments
