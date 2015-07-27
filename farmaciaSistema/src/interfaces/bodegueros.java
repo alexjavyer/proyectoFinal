@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author javy
  */
-public class bodegueros extends javax.swing.JInternalFrame {
+public class bodegueros extends javax.swing.JFrame {
     DefaultTableModel model;
     
     // mandar fotos
@@ -48,7 +48,7 @@ public class bodegueros extends javax.swing.JInternalFrame {
         botonesIniciales();
         bloquear();
         cargarTabla("");
-        cargarFoto();
+    //    cargarFoto();
         
         //cargar tabla
         
@@ -176,11 +176,12 @@ public class bodegueros extends javax.swing.JInternalFrame {
             conexion cc = new conexion();
             Connection cn = cc.conectar();
             String sql="";
-            String cedula,nombre,apellido,sueldo,foto;
+            String cedula,nombre,apellido,foto;
+            double sueldo;
             cedula = txtBodCedula.getText();
             nombre = txtBodNombre.getText();
             apellido = txtBodApellido.getText();
-            sueldo = txtBodSueldo.getText();
+            sueldo = Double.valueOf(txtBodSueldo.getText());
             foto = "C:\\FOTOSFARMACIA\\"+txtBodCedula.getText()+".jpg";
             // pasa la iamgen a c;\\Foto\\
             File archivoGuardar = new File (foto);       
@@ -193,7 +194,7 @@ public class bodegueros extends javax.swing.JInternalFrame {
             psd.setString(1, cedula);
             psd.setString(2, nombre);
             psd.setString(3, apellido);
-            psd.setString(4, sueldo);
+            psd.setDouble(4, sueldo);
             psd.setString(5, foto);
             int n=psd.executeUpdate();
             if(n>0){
