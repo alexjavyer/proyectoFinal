@@ -104,6 +104,37 @@ public class detalles_pedidos extends javax.swing.JFrame {
         }
     }
     
+    public void ActualizarPedidos(){
+        try {
+            conexion cc = new conexion();
+            Connection cn = cc.conectar();
+            String sql="",sql1,sql2;
+            int pre =0,total=0,resul=0,canti=Integer.valueOf(txtCantidad.getText());
+            sql1="SELECT PRE_MED FROM MEDICINAS WHERE COD_MED='"+txtCodigo.getText()+"'";
+            sql2="SELECT TOTAL_PED FROM PEDIDO WHERE NUM_PED='"+txtNumero.getText()+"'";
+            Statement psd = cn.createStatement();
+            ResultSet rs = psd.executeQuery(sql);
+            while(rs.next()){
+                pre=Integer.valueOf(rs.getString("PRE_MED"));
+            }
+            ResultSet rs1 = psd.executeQuery(sql1);
+            while(rs.next()){
+                total=Integer.valueOf(rs.getString("TOTAL_PED"));
+            }
+            resul=(canti*pre)+total;
+            sql="UPDATE PEDIDO SET TOTAL_PED='"+resul+"'WHERE NUM_PED='"+txtCodigo.getText()+"'";
+            PreparedStatement psdf = cn.prepareStatement(sql);
+            if(psdf.executeUpdate()>0){
+                JOptionPane.showMessageDialog(null,"Se actualizó correctamente");
+                cargarDetallePedidos("");
+                botonesIniciales();
+                limpiar();
+                bloquear();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
     public void Guardar(){
         try {
             conexion cc = new conexion();
@@ -419,6 +450,7 @@ public class detalles_pedidos extends javax.swing.JFrame {
     private void jbtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtGuardarActionPerformed
         // TODO add your handling code here:
         Guardar();
+        ActualizarPedidos();
     }//GEN-LAST:event_jbtGuardarActionPerformed
 
     private void jbtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelarActionPerformed
