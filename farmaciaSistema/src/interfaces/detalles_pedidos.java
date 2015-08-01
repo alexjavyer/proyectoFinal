@@ -110,7 +110,7 @@ public class detalles_pedidos extends javax.swing.JFrame {
             Connection cn = cc.conectar();
             String sql="",sql1,sql2;
             int pre =0,total=0,resul=0,canti=Integer.valueOf(txtCantidad.getText());
-            sql1="SELECT PRE_MED FROM MEDICAMENTOS WHERE COD_MED='"+txtCodigo.getText()+"'";
+            sql1="SELECT PRE_MED FROM MEDICAMENTOS WHERE COD_MED ='"+txtCodigo.getText()+"'";
             sql2="SELECT TOTAL_PED FROM PEDIDO WHERE NUM_PED='"+txtNumero.getText()+"'";
             Statement psd = cn.createStatement();
             ResultSet rs = psd.executeQuery(sql);
