@@ -110,7 +110,7 @@ public class detalles_pedidos extends javax.swing.JFrame {
             Connection cn = cc.conectar();
             String sql="",sql1,sql2;
             int pre =0,total=0,resul=0,canti=Integer.valueOf(txtCantidad.getText());
-            sql1="SELECT PRE_MED FROM MEDICINAS WHERE COD_MED='"+txtCodigo.getText()+"'";
+            sql1="SELECT PRE_MED FROM MEDICAMENTOS WHERE COD_MED='"+txtCodigo.getText()+"'";
             sql2="SELECT TOTAL_PED FROM PEDIDO WHERE NUM_PED='"+txtNumero.getText()+"'";
             Statement psd = cn.createStatement();
             ResultSet rs = psd.executeQuery(sql);
@@ -143,11 +143,12 @@ public class detalles_pedidos extends javax.swing.JFrame {
             sql="insert into DETALLE_PEDIDO (COD_MED_P,CANT_P,NUM_PED) values (?,?,?)";
             PreparedStatement psd = cn.prepareStatement(sql);
             psd.setString(1, txtCodigo.getText());
-            psd.setString(2, txtCantidad.getText());
+            psd.setInt(2, Integer.valueOf(txtCantidad.getText()));
             psd.setString(3, txtNumero.getText());
             int n=psd.executeUpdate();
             if(n>0){
                 JOptionPane.showMessageDialog(null, "Se inserto correctamente");
+                ActualizarPedidos();
                 limpiar();
                 botonesIniciales();
                 bloquear();
@@ -194,7 +195,7 @@ public class detalles_pedidos extends javax.swing.JFrame {
         conexion cc = new conexion();
         Connection cn = cc.conectar();
         String sql="";
-        sql="DELETE pedidos WHERE COD_MED_P = '"+txtCodigo.getText()+"'AND NUM_PED = '"+txtNumero.getText()+"'";
+        sql="DELETE FROM detalle_pedido WHERE COD_MED_P = '"+txtCodigo.getText()+"'"+"AND NUM_PED = '"+txtNumero.getText()+"'";
         try{
             PreparedStatement psd = cn.prepareStatement(sql);
             if(psd.executeUpdate()>0){
@@ -244,7 +245,7 @@ public class detalles_pedidos extends javax.swing.JFrame {
 
         jpnDatos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Código");
+        jLabel1.setText("Código Medicamento");
 
         jLabel2.setText("Cantidad");
 
@@ -450,7 +451,7 @@ public class detalles_pedidos extends javax.swing.JFrame {
     private void jbtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtGuardarActionPerformed
         // TODO add your handling code here:
         Guardar();
-        ActualizarPedidos();
+        
     }//GEN-LAST:event_jbtGuardarActionPerformed
 
     private void jbtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelarActionPerformed

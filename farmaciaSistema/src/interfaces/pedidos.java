@@ -51,6 +51,7 @@ public class pedidos extends javax.swing.JFrame {
         }
         );
         cargarPedidos("");
+        bloquear();
     }
     public void botonesIniciales(){
         jbtNuevo.setEnabled(true);
@@ -121,14 +122,14 @@ public class pedidos extends javax.swing.JFrame {
             conexion cc = new conexion();
             Connection cn = cc.conectar();
             String sql="";
-            sql="insert into pedido (NUM_PED,FEC_HOR_PED,TOTAL_PED,CI_BOD_PER,CI_VIS_PER) values (?,?,?,?,?)";
             String fecha=new SimpleDateFormat("dd/MM/yyyy").format(date.getDate());
+            sql="insert into pedido (NUM_PED,FEC_HOR_PED,TOTAL_PED,CI_BOD_PER,CI_VIS_PER) values (?,TO_DATE('"+fecha+"','DD/MM/YYYY'),?,?,?)";
             PreparedStatement psd = cn.prepareStatement(sql);
             psd.setString(1, txtNumero.getText());
-            psd.setString(2, fecha);
-            psd.setString(3, txtTotal.getText());
-            psd.setString(4, txtBodeguero.getText());
-            psd.setString(5, txtVisitador.getText());
+//            psd.setString(2, fecha);
+            psd.setInt(2, 0);
+            psd.setString(3, txtBodeguero.getText());
+            psd.setString(4, txtVisitador.getText());
             int n=psd.executeUpdate();
             if(n>0){
                 JOptionPane.showMessageDialog(null, "Se inserto correctamente");
@@ -172,7 +173,7 @@ public class pedidos extends javax.swing.JFrame {
         conexion cc = new conexion();
         Connection cn = cc.conectar();
         String sql="";
-        sql="DELETE pedido WHERE NUM_PED = '"+txtNumero.getText()+"'";
+        sql="DELETE FROM pedido WHERE NUM_PED = '"+txtNumero.getText()+"'";
         try{
             PreparedStatement psd = cn.prepareStatement(sql);
             if(psd.executeUpdate()>0){
