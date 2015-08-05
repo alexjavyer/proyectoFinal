@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author javy
  */
-public class bodegueros extends javax.swing.JFrame {
+public class bodegueros extends javax.swing.JInternalFrame {
     DefaultTableModel model;
     
     // mandar fotos

@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author javy
  */
-public class pedidos extends javax.swing.JFrame {
+public class pedidos extends javax.swing.JInternalFrame {
     DefaultTableModel model;
 
     /**

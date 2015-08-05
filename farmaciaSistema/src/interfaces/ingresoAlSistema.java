@@ -124,7 +124,7 @@ public class ingresoAlSistema extends javax.swing.JFrame {
             
             while(rs.next())
             {  
-             if(txtUsuario.getText().equals(rs.getString("ci_usu"))&& txtClave.getText().equals(rs.getString("CLA_USU")))
+             if(txtUsuario.getText().equals(rs.getString("CI_USU"))&& txtClave.getText().equals(rs.getString("CLA_USU")))
              {
                  if(rs.getString("PER_USU").equals("ADMINISTRADOR"))
                  {
@@ -134,7 +134,7 @@ public class ingresoAlSistema extends javax.swing.JFrame {
                  this.dispose();
 //                 mn.jmVentas.setEnabled(false);
                  }
-                 else if(rs.getString("tip_USU").equals("FARMACEUTICO"))
+                 else if(rs.getString("TIP_USU").equals("FARMACEUTICO"))
                  {
                  menu mn=new menu();
                  mn.setExtendedState(MAXIMIZED_BOTH);
@@ -144,7 +144,7 @@ public class ingresoAlSistema extends javax.swing.JFrame {
                  mn.jmBodegueros.setEnabled(false);
                  
                  }
-                 else if(rs.getString("PER_USU").equals("BODEGUERO"))
+                 else if(rs.getString("TIP_USU").equals("BODEGUERO"))
                  {
                  menu mn=new menu();
                  mn.setExtendedState(MAXIMIZED_BOTH);
