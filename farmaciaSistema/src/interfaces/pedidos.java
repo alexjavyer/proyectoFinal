@@ -51,7 +51,11 @@ public class pedidos extends javax.swing.JInternalFrame {
         }
         );
         cargarPedidos("");
+        CargarBodeguero();
+        CargarVisitador();
+        botonesIniciales();
         bloquear();
+        limpiar();
     }
     public void botonesIniciales(){
         jbtNuevo.setEnabled(true);
@@ -60,6 +64,8 @@ public class pedidos extends javax.swing.JInternalFrame {
         jbtCancelar.setEnabled(false);
         jbtGuardar.setEnabled(false);
         jbtSalir.setEnabled(true);
+        jcbBodegueros.setEnabled(false);
+        jcmVisitador.setEnabled(false);
     }
     
     public void limpiar(){
@@ -76,6 +82,8 @@ public class pedidos extends javax.swing.JInternalFrame {
         txtBodeguero.setEnabled(true);
         txtVisitador.setEnabled(true);
         txtBusqueda.setEnabled(true);
+        jcbBodegueros.setEnabled(true);
+        jcmVisitador.setEnabled(true);
     }
     
     public void bloquear(){
@@ -83,6 +91,8 @@ public class pedidos extends javax.swing.JInternalFrame {
         date.setEnabled(false);
         txtBodeguero.setEnabled(false);
         txtVisitador.setEnabled(false);
+        jcbBodegueros.setEnabled(false);
+        jcmVisitador.setEnabled(false);
     }
     
     public void Nuevo(){
@@ -91,7 +101,38 @@ public class pedidos extends javax.swing.JInternalFrame {
         jbtCancelar.setEnabled(true);
         limpiar();
     }
-
+    
+    public void CargarBodeguero() {
+        try {
+            conexion cc = new conexion();
+            Connection cn = cc.conectar();
+            String sql = "";
+            sql = "SELECT * FROM BODEGUERO ORDER BY CI_BOD";
+            Statement psd = cn.createStatement();
+            ResultSet rs = psd.executeQuery(sql);
+            while (rs.next()) {
+                jcbBodegueros.addItem(rs.getString("CI_BOD"));
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    public void CargarVisitador() {
+        try {
+            conexion cc = new conexion();
+            Connection cn = cc.conectar();
+            String sql = "";
+            sql = "SELECT * FROM VISITADOR_N ORDER BY CI_VIS";
+            Statement psd = cn.createStatement();
+            ResultSet rs = psd.executeQuery(sql);
+            while (rs.next()) {
+                jcmVisitador.addItem(rs.getString("CI_VIS"));
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
     public void cargarPedidos(String dato){
         conexion cc = new conexion();
         Connection cn = cc.conectar();
@@ -126,7 +167,6 @@ public class pedidos extends javax.swing.JInternalFrame {
             sql="insert into pedido (NUM_PED,FEC_HOR_PED,TOTAL_PED,CI_BOD_PER,CI_VIS_PER) values (?,TO_DATE('"+fecha+"','DD/MM/YYYY'),?,?,?)";
             PreparedStatement psd = cn.prepareStatement(sql);
             psd.setString(1, txtNumero.getText());
-//            psd.setString(2, fecha);
             psd.setInt(2, 0);
             psd.setString(3, txtBodeguero.getText());
             psd.setString(4, txtVisitador.getText());
@@ -221,10 +261,16 @@ public class pedidos extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         date = new com.toedter.calendar.JDateChooser();
-        jLabel7 = new javax.swing.JLabel();
+        jcbBodegueros = new javax.swing.JComboBox();
+        jcmVisitador = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Pedidos");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("PEDIDOS");
+        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                formPropertyChange(evt);
+            }
+        });
 
         jpnBotones.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -291,7 +337,7 @@ public class pedidos extends javax.swing.JInternalFrame {
                     .addComponent(jbtBorrar)
                     .addComponent(jbtDetalles)
                     .addComponent(jbtSalir))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnBotonesLayout.setVerticalGroup(
             jpnBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,7 +356,7 @@ public class pedidos extends javax.swing.JInternalFrame {
                 .addComponent(jbtDetalles)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtSalir)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jpnBusqueda.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -365,6 +411,18 @@ public class pedidos extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Cédula del Visitador");
 
+        jcbBodegueros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbBodeguerosActionPerformed(evt);
+            }
+        });
+
+        jcmVisitador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcmVisitadorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnDatosLayout = new javax.swing.GroupLayout(jpnDatos);
         jpnDatos.setLayout(jpnDatosLayout);
         jpnDatosLayout.setHorizontalGroup(
@@ -377,14 +435,20 @@ public class pedidos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtBodeguero, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                    .addComponent(txtVisitador)
-                    .addComponent(txtNumero)
-                    .addComponent(txtTotal)
-                    .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(32, 32, 32)
+                .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnDatosLayout.createSequentialGroup()
+                        .addComponent(txtBodeguero, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jcbBodegueros, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpnDatosLayout.createSequentialGroup()
+                        .addComponent(txtVisitador, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jcmVisitador, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnDatosLayout.setVerticalGroup(
             jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -406,16 +470,15 @@ public class pedidos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBodeguero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jcbBodegueros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
                     .addComponent(txtVisitador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addContainerGap(62, Short.MAX_VALUE))
+                    .addComponent(jcmVisitador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
-
-        jLabel7.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
-        jLabel7.setText("Pedidos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -424,33 +487,26 @@ public class pedidos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpnBusqueda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(95, 95, 95))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jpnDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)))
-                        .addComponent(jpnBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jpnDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(jpnBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+                        .addComponent(jpnBusqueda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jpnDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpnBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpnBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -490,10 +546,25 @@ public class pedidos extends javax.swing.JInternalFrame {
     private void jbtDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDetallesActionPerformed
         // TODO add your handling code here:
         detalles_pedidos pe=new detalles_pedidos();
-//        jDesktopPane1.add(pe);
+        menu.panelprincipal.add(pe);
         pe.setVisible(true);
         pe.show();
     }//GEN-LAST:event_jbtDetallesActionPerformed
+
+    private void formPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formPropertyChange
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_formPropertyChange
+
+    private void jcbBodeguerosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbBodeguerosActionPerformed
+        // TODO add your handling code here:
+        txtBodeguero.setText(jcbBodegueros.getSelectedItem().toString());
+    }//GEN-LAST:event_jcbBodeguerosActionPerformed
+
+    private void jcmVisitadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcmVisitadorActionPerformed
+        // TODO add your handling code here:
+        txtVisitador.setText(jcmVisitador.getSelectedItem().toString());
+    }//GEN-LAST:event_jcmVisitadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -539,7 +610,6 @@ public class pedidos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtActualizar;
     private javax.swing.JButton jbtBorrar;
@@ -548,6 +618,8 @@ public class pedidos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbtGuardar;
     private javax.swing.JButton jbtNuevo;
     private javax.swing.JButton jbtSalir;
+    private javax.swing.JComboBox jcbBodegueros;
+    private javax.swing.JComboBox jcmVisitador;
     private javax.swing.JPanel jpnBotones;
     private javax.swing.JPanel jpnBusqueda;
     private javax.swing.JPanel jpnDatos;

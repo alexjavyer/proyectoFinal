@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -20,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author javy
  */
-public class detalles_pedidos extends javax.swing.JFrame {
+public class detalles_pedidos extends javax.swing.JInternalFrame {
     DefaultTableModel model;
 
     /**
@@ -40,12 +39,17 @@ public class detalles_pedidos extends javax.swing.JFrame {
                     txtNumero.setText(jtbDetallesPedidos.getValueAt(fila, 2).toString());
                     jbtActualizar.setEnabled(true);
                     jbtBorrar.setEnabled(true);
-                    jbtCancelar.setEnabled(true);
+                    jbtCancelar.setEnabled(true);                   
              }
             }
         }
         );
-        cargarDetallePedidos("");
+        bloquear();
+        botonesIniciales();
+        cargarDetallePedidos();
+        CargarPedido();
+        CargarMedicamento();
+        limpiar();
     }
     public void botonesIniciales(){
         jbtNuevo.setEnabled(true);
@@ -54,6 +58,8 @@ public class detalles_pedidos extends javax.swing.JFrame {
         jbtCancelar.setEnabled(false);
         jbtGuardar.setEnabled(false);
         jbtSalir.setEnabled(true);
+        jcbMedicamento.setEnabled(false);
+        jcbPedido.setEnabled(false);
     }
     
     public void limpiar(){
@@ -66,12 +72,16 @@ public class detalles_pedidos extends javax.swing.JFrame {
         txtNumero.setEnabled(true);
         txtCodigo.setEnabled(true);
         txtCantidad.setEnabled(true);
+        jcbMedicamento.setEnabled(true);
+        jcbPedido.setEnabled(true);
     }
     
     public void bloquear(){
         txtNumero.setEnabled(false);
         txtCantidad.setEnabled(false);
         txtCodigo.setEnabled(false);
+        jcbMedicamento.setEnabled(false);
+        jcbPedido.setEnabled(false);
     }
     
     public void Nuevo(){
@@ -80,14 +90,46 @@ public class detalles_pedidos extends javax.swing.JFrame {
         jbtCancelar.setEnabled(true);
         limpiar();
     }
+    
+    public void CargarPedido() {
+        try {
+            conexion cc = new conexion();
+            Connection cn = cc.conectar();
+            String sql = "";
+            sql = "SELECT * FROM PEDIDO ORDER BY NUM_PED";
+            Statement psd = cn.createStatement();
+            ResultSet rs = psd.executeQuery(sql);
+            while (rs.next()) {
+                jcbPedido.addItem(rs.getString("NUM_PED"));
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    public void CargarMedicamento() {
+        try {
+            conexion cc = new conexion();
+            Connection cn = cc.conectar();
+            String sql = "";
+            sql = "SELECT * FROM MEDICAMENTOS ORDER BY COD_MED";
+            Statement psd = cn.createStatement();
+            ResultSet rs = psd.executeQuery(sql);
+            while (rs.next()) {
+                jcbMedicamento.addItem(rs.getString("COD_MED"));
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
 
-    public void cargarDetallePedidos(String dato){
+    public void cargarDetallePedidos(){
         conexion cc = new conexion();
         Connection cn = cc.conectar();
         String titulo[] = {"CÓDIGO DE MEDICINA","CANTIDAD","NÚMERO DE PEDIDO"};
         model = new DefaultTableModel(null,titulo);
         String registros [] = new String[3];
-        String sql;
+        String sql,dato=txtBusqueda.getText();
         sql = "select * from DETALLE_PEDIDO where COD_MED_P like '%"+dato+"%'";
         try{
         Statement psd = cn.createStatement();
@@ -103,38 +145,7 @@ public class detalles_pedidos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
-    public void ActualizarPedidos(){
-        try {
-            conexion cc = new conexion();
-            Connection cn = cc.conectar();
-            String sql="",sql1,sql2;
-            int pre =0,total=0,resul=0,canti=Integer.valueOf(txtCantidad.getText());
-            sql1="SELECT PRE_MED FROM MEDICAMENTOS WHERE COD_MED ='"+txtCodigo.getText()+"'";
-            sql2="SELECT TOTAL_PED FROM PEDIDO WHERE NUM_PED='"+txtNumero.getText()+"'";
-            Statement psd = cn.createStatement();
-            ResultSet rs = psd.executeQuery(sql);
-            while(rs.next()){
-                pre=Integer.valueOf(rs.getString("PRE_MED"));
-            }
-            ResultSet rs1 = psd.executeQuery(sql1);
-            while(rs.next()){
-                total=Integer.valueOf(rs.getString("TOTAL_PED"));
-            }
-            resul=(canti*pre)+total;
-            sql="UPDATE PEDIDO SET TOTAL_PED='"+resul+"'WHERE NUM_PED='"+txtCodigo.getText()+"'";
-            PreparedStatement psdf = cn.prepareStatement(sql);
-            if(psdf.executeUpdate()>0){
-                JOptionPane.showMessageDialog(null,"Se actualizó correctamente");
-                cargarDetallePedidos("");
-                botonesIniciales();
-                limpiar();
-                bloquear();
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }
+      
     public void Guardar(){
         try {
             conexion cc = new conexion();
@@ -148,11 +159,10 @@ public class detalles_pedidos extends javax.swing.JFrame {
             int n=psd.executeUpdate();
             if(n>0){
                 JOptionPane.showMessageDialog(null, "Se inserto correctamente");
-                ActualizarPedidos();
                 limpiar();
                 botonesIniciales();
                 bloquear();
-                cargarDetallePedidos("");
+                cargarDetallePedidos();
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -175,12 +185,12 @@ public class detalles_pedidos extends javax.swing.JFrame {
         conexion cc = new conexion();
         Connection cn = cc.conectar();
         String sql="";
-        sql="UPDATE DETALLE_PEDIDO SET CANT_P='"+txtCantidad.getText()+"'WHERE NUM_PED='"+txtCodigo.getText()+"' AND NUM_PED = '"+txtNumero.getText()+"'";
+        sql="UPDATE DETALLE_PEDIDO SET CANT_P='"+txtCantidad.getText()+"' WHERE COD_MED_P = '"+txtCodigo.getText()+"' AND NUM_PED = '"+txtNumero.getText()+"' AND CANT_P = '"+txtCantidad.getText()+"'";
         try{
             PreparedStatement psd = cn.prepareStatement(sql);
             if(psd.executeUpdate()>0){
                 JOptionPane.showMessageDialog(null,"Se actualizó correctamente");
-                cargarDetallePedidos("");
+                cargarDetallePedidos();
                 botonesIniciales();
                 limpiar();
                 bloquear();
@@ -195,12 +205,12 @@ public class detalles_pedidos extends javax.swing.JFrame {
         conexion cc = new conexion();
         Connection cn = cc.conectar();
         String sql="";
-        sql="DELETE FROM detalle_pedido WHERE COD_MED_P = '"+txtCodigo.getText()+"'"+"AND NUM_PED = '"+txtNumero.getText()+"'";
+        sql="DELETE FROM detalle_pedido WHERE COD_MED_P = '"+txtCodigo.getText()+"' AND NUM_PED = '"+txtNumero.getText()+"' AND CANT_P = '"+txtCantidad.getText()+"'";
         try{
             PreparedStatement psd = cn.prepareStatement(sql);
             if(psd.executeUpdate()>0){
                 JOptionPane.showMessageDialog(null,"Se eliminó correctamente");
-                cargarDetallePedidos("");
+                cargarDetallePedidos();
                 botonesIniciales();
                 limpiar();
                 bloquear();
@@ -227,6 +237,8 @@ public class detalles_pedidos extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
         txtNumero = new javax.swing.JTextField();
+        jcbMedicamento = new javax.swing.JComboBox();
+        jcbPedido = new javax.swing.JComboBox();
         jpnBotones = new javax.swing.JPanel();
         jbtNuevo = new javax.swing.JButton();
         jbtGuardar = new javax.swing.JButton();
@@ -239,9 +251,9 @@ public class detalles_pedidos extends javax.swing.JFrame {
         txtBusqueda = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbDetallesPedidos = new javax.swing.JTable();
-        jLabel7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("DETALLE DE PEDIDOS");
 
         jpnDatos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -250,6 +262,18 @@ public class detalles_pedidos extends javax.swing.JFrame {
         jLabel2.setText("Cantidad");
 
         jLabel3.setText("Número de Pedido");
+
+        jcbMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbMedicamentoActionPerformed(evt);
+            }
+        });
+
+        jcbPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbPedidoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnDatosLayout = new javax.swing.GroupLayout(jpnDatos);
         jpnDatos.setLayout(jpnDatosLayout);
@@ -262,27 +286,34 @@ public class detalles_pedidos extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addGap(31, 31, 31)
+                .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtCantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNumero))
+                .addGap(35, 35, 35)
                 .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                        .addComponent(txtCantidad)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(jcbMedicamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jcbPedido, 0, 93, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jpnDatosLayout.setVerticalGroup(
             jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnDatosLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(37, 37, 37)
                 .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcbMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jpnDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcbPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -344,7 +375,7 @@ public class detalles_pedidos extends javax.swing.JFrame {
                     .addComponent(jbtCancelar)
                     .addComponent(jbtGuardar)
                     .addComponent(jbtNuevo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jpnBotonesLayout.setVerticalGroup(
             jpnBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +407,7 @@ public class detalles_pedidos extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(55, 55, 55)
                 .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         jpnBusquedaLayout.setVerticalGroup(
             jpnBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,9 +433,6 @@ public class detalles_pedidos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtbDetallesPedidos);
 
-        jLabel7.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
-        jLabel7.setText("DETALLE DE Pedidos");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -416,20 +444,14 @@ public class detalles_pedidos extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jpnDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jpnBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jpnBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(160, 160, 160))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jpnBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpnDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -437,7 +459,7 @@ public class detalles_pedidos extends javax.swing.JFrame {
                 .addComponent(jpnBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -451,7 +473,6 @@ public class detalles_pedidos extends javax.swing.JFrame {
     private void jbtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtGuardarActionPerformed
         // TODO add your handling code here:
         Guardar();
-        
     }//GEN-LAST:event_jbtGuardarActionPerformed
 
     private void jbtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelarActionPerformed
@@ -461,7 +482,7 @@ public class detalles_pedidos extends javax.swing.JFrame {
 
     private void jbtActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtActualizarActionPerformed
         // TODO add your handling code here:
-        Actualizar();
+       Actualizar();
     }//GEN-LAST:event_jbtActualizarActionPerformed
 
     private void jbtBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtBorrarActionPerformed
@@ -473,6 +494,16 @@ public class detalles_pedidos extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jbtSalirActionPerformed
+
+    private void jcbMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMedicamentoActionPerformed
+        // TODO add your handling code here:
+        txtCodigo.setText(jcbMedicamento.getSelectedItem().toString());
+    }//GEN-LAST:event_jcbMedicamentoActionPerformed
+
+    private void jcbPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPedidoActionPerformed
+        // TODO add your handling code here:
+        txtNumero.setText(jcbPedido.getSelectedItem().toString());
+    }//GEN-LAST:event_jcbPedidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -514,7 +545,6 @@ public class detalles_pedidos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtActualizar;
     private javax.swing.JButton jbtBorrar;
@@ -522,6 +552,8 @@ public class detalles_pedidos extends javax.swing.JFrame {
     private javax.swing.JButton jbtGuardar;
     private javax.swing.JButton jbtNuevo;
     private javax.swing.JButton jbtSalir;
+    private javax.swing.JComboBox jcbMedicamento;
+    private javax.swing.JComboBox jcbPedido;
     private javax.swing.JPanel jpnBotones;
     private javax.swing.JPanel jpnBusqueda;
     private javax.swing.JPanel jpnDatos;
