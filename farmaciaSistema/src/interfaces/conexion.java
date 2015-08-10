@@ -23,7 +23,7 @@ public class conexion {
             Class.forName("org.postgresql.Driver");
            // connect = DriverManager.getConnection("jdbc:postgresql://192.168.1.4:5432/farmacia","postgres","desarrollo");
              connect = DriverManager.getConnection("jdbc:postgresql://localhost:5432/farmacia","postgres","desarrollo");
-            JOptionPane.showMessageDialog(null, "Conexion Exitosa");
+         //   JOptionPane.showMessageDialog(null, "Conexion Exitosa");
         }catch(Exception ex){
              JOptionPane.showMessageDialog(null, "No se pudo conectar"+ex);
         }
