@@ -129,11 +129,12 @@ void cargarVenta(){
         try {
             conexion cc = new conexion();
             Connection cn = cc.conectar();
-            String ci_bod,nom_bod,ape_bod,sue_bod;
+            String ci_bod;
+            int nom_bod,ape_bod;
             //ci_bod  = txtVisCedula1.getSelectedItem().toString();
             ci_bod = medicamento.getText();
-            nom_bod = txtVisrNombre.getText();
-            ape_bod = venta.getText();
+            nom_bod = Integer.valueOf(txtVisrNombre.getText());
+            ape_bod = Integer.valueOf(venta.getText());
             //ape_bod  = txtVisApellido1.getSelectedItem().toString();
            // sue_bod  = txtFarSueldo.getText();
             String sql="";
@@ -141,8 +142,8 @@ void cargarVenta(){
            PreparedStatement psd = cn.prepareStatement(sql);
          
            psd.setString(1, ci_bod);
-           psd.setString(2, nom_bod);
-           psd.setString(3, ape_bod);
+           psd.setInt(2, nom_bod);
+           psd.setInt(3, ape_bod);
            //psd.setString(4, sue_bod);
             int n = psd.executeUpdate();
             if(n>0){
