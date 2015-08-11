@@ -5,6 +5,7 @@
 package reportes;
 
 import interfaces.conexion;
+import interfaces.menu;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -22,7 +23,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author Javy
  */
-public class clienteMasCompra extends javax.swing.JFrame {
+public class clienteMasCompra extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form medicamentoMasPedido
@@ -73,8 +74,8 @@ public class clienteMasCompra extends javax.swing.JFrame {
                        JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/cleinteQueMasCompra.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"cleinteQueMasCompra"+".pdf");
-                       JasperViewer.viewReport(print);
-                       dispose();
+                 //      JasperViewer.viewReport(print);
+                 //      dispose();
               //         
                        //principalBase ver = new principalBase();
                        
@@ -119,7 +120,7 @@ public class clienteMasCompra extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("VER REPORTE");
+        jButton2.setText("GENERAR REPORTE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -144,7 +145,7 @@ public class clienteMasCompra extends javax.swing.JFrame {
                         .addGap(75, 75, 75))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addGap(148, 148, 148))))
+                        .addGap(122, 122, 122))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +159,7 @@ public class clienteMasCompra extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,6 +173,8 @@ public class clienteMasCompra extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         reporte();
+        String dir="cleinteQueMasCompra";  
+        menu.visualizador(dir1+dir+".pdf");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

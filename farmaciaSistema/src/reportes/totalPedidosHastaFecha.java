@@ -5,6 +5,7 @@
 package reportes;
 
 import interfaces.conexion;
+import interfaces.menu;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -23,7 +24,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author Javy
  */
-public class totalPedidosHastaFecha extends javax.swing.JFrame {
+public class totalPedidosHastaFecha extends javax.swing.JInternalFrame {
     private DefaultTableModel model;
 
     /**
@@ -32,7 +33,7 @@ public class totalPedidosHastaFecha extends javax.swing.JFrame {
     public totalPedidosHastaFecha() {
         initComponents();
         totalPedidosHastaFecha();
-              setBounds(250, 100, 875, 360);
+              setBounds(500, 200, 375, 160);
         getContentPane().setBackground(new java.awt.Color(12,10,204));
         setTitle("P E D I D O S  H A S T A  L A  F E C H A");
     }
@@ -74,8 +75,8 @@ public class totalPedidosHastaFecha extends javax.swing.JFrame {
                        JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/pedidosFecha.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"pedidosFecha"+".pdf");
-                       JasperViewer.viewReport(print);
-                       dispose();
+            //           JasperViewer.viewReport(print);
+              //         dispose();
               //         
                        //principalBase ver = new principalBase();
                        
@@ -101,7 +102,7 @@ public class totalPedidosHastaFecha extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,7 +121,7 @@ public class totalPedidosHastaFecha extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("VER REPORTE");
+        jButton2.setText("GENERAR  REPORTE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -132,18 +133,20 @@ public class totalPedidosHastaFecha extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(333, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(263, 263, 263)
-                .addComponent(jButton1))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(294, 294, 294)
-                .addComponent(jLabel2)
-                .addGap(64, 64, 64)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jButton1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,6 +174,9 @@ public class totalPedidosHastaFecha extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         reporte();
+        String dir="pedidosFecha";  
+        menu.visualizador(dir1+dir+".pdf"); 
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

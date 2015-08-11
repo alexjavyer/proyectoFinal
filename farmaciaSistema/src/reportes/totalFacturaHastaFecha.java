@@ -5,10 +5,10 @@
 package reportes;
 
 import interfaces.conexion;
+import interfaces.menu;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -24,7 +24,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author Javy
  */
-public class totalFacturaHastaFecha extends javax.swing.JFrame {
+public class totalFacturaHastaFecha extends javax.swing.JInternalFrame {
     private DefaultTableModel model;
 
     /**
@@ -34,7 +34,7 @@ public class totalFacturaHastaFecha extends javax.swing.JFrame {
         initComponents();
         totalFacturaHastaFecha();
         
-        setBounds(250, 100, 875, 360);
+        setBounds(500, 100, 355, 200);
         getContentPane().setBackground(new java.awt.Color(12,10,204));
         setTitle("V E N T A S  H A S T A  L A  F E C H A");
     }
@@ -69,8 +69,8 @@ public class totalFacturaHastaFecha extends javax.swing.JFrame {
                        JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/ventasFecha.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"ventasFecha"+".pdf");
-                       JasperViewer.viewReport(print);
-                       dispose();
+          //             JasperViewer.viewReport(print);
+           //            dispose();
               //         
                        //principalBase ver = new principalBase();
                        
@@ -98,7 +98,7 @@ public class totalFacturaHastaFecha extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -117,7 +117,7 @@ public class totalFacturaHastaFecha extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("VER REPORTE");
+        jButton2.setText("GEENRAR REPORTE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -129,21 +129,22 @@ public class totalFacturaHastaFecha extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 253, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(175, 175, 175)
-                .addComponent(jButton1))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
                         .addComponent(jLabel2)
                         .addGap(64, 64, 64)
                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(288, 288, 288))
+                        .addGap(52, 52, 52))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(388, 388, 388))))
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,6 +172,8 @@ public class totalFacturaHastaFecha extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         reporte();
+         String dir="ventasFecha";  
+         menu.visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

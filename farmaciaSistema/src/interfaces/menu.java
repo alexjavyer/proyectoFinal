@@ -5,8 +5,7 @@
  */
 package interfaces;
 
-import java.beans.PropertyVetoException;
-import javax.swing.JOptionPane;
+import reportes.*;
 
 /**
  *
@@ -22,6 +21,16 @@ public class menu extends javax.swing.JFrame {
 //        jDesktopPane1.setBorder(new ImagenFondo());
                  setExtendedState(menu.MAXIMIZED_BOTH);
           setTitle("F A R M A C I A");
+    }
+    String dir1="C:\\ReportesFinal\\";
+    public static void visualizador(String path){
+          verPDF p=new verPDF(path);		
+	  //p.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	  p.setVisible(true);
+	  p.setBounds(0, 0, 500, 680);
+          jDesktopPane1.add(p);
+          p.setMaximizable(true);
+          p.show();
     }
 
     @SuppressWarnings("unchecked")
@@ -167,30 +176,75 @@ public class menu extends javax.swing.JFrame {
         jMenu1.setText("REPORTES");
 
         jMenuItem14.setText("CLIENTE QUÉ MÁS COMPRA");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem14);
 
         jMenuItem15.setText("FARMACEUTICO QUÉ MÁS VENDE");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem15);
 
         jMenuItem16.setText("MEDICAMENTOS MÁS PEDIDO");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem16);
 
         jMenuItem17.setText("MEDICAMENTOS MÁS COMPRADO");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem17);
 
         jMenuItem18.setText("VENTAS ENTRE DOS FECHAS");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem18);
 
         jMenuItem19.setText("PEDIDOS ENTRE DOS FECHAS");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem19);
 
         jMenuItem20.setText("GANANCIA DEL DÍA");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem20);
 
         jMenuItem21.setText("TOTAL VENTAS HASTA LA FECHA");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem21);
 
         jMenuItem22.setText("TOTAL PEDIDOS HASTA LA FECHA");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem22);
 
         jMenu3.setText("FACTURAS");
@@ -415,6 +469,88 @@ public class menu extends javax.swing.JFrame {
         far.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        // TODO add your handling code here:
+           clienteMasCompra far = new clienteMasCompra();
+           jDesktopPane1.add(far);
+           far.setVisible(true);
+//            String dir="cleinteQueMasCompra";  
+//            visualizador(dir1+dir+".pdf"); 
+           
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        // TODO add your handling code here:
+        farmaceuticoMasvende far = new farmaceuticoMasvende();
+           jDesktopPane1.add(far);
+        far.setVisible(true);
+//        String dir="farmaceuticoQueMasVende";  
+//            visualizador(dir1+dir+".pdf"); 
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        // TODO add your handling code here:
+        medicamentoMasPedido far = new medicamentoMasPedido();
+           jDesktopPane1.add(far);
+        far.setVisible(true);
+//        String dir="medicamentoMasPedido";  
+//            visualizador(dir1+dir+".pdf"); 
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        // TODO add your handling code here:
+         medicamentoMasComprado far = new medicamentoMasComprado();
+           jDesktopPane1.add(far);
+        far.setVisible(true);
+ //       String dir="medicamentoMasComprado";  
+ //           visualizador(dir1+dir+".pdf"); 
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        // TODO add your handling code here:
+        facturasEntreDosFechasSuma far = new facturasEntreDosFechasSuma();
+           jDesktopPane1.add(far);
+        far.setVisible(true);
+ //       String dir="";  
+ //           visualizador(dir1+dir+".pdf"); 
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        // TODO add your handling code here:
+          pedidosEntreDosFechasSuma far = new pedidosEntreDosFechasSuma();
+           jDesktopPane1.add(far);
+        far.setVisible(true);
+ //       String dir="";  
+ //           visualizador(dir1+dir+".pdf"); 
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        // TODO add your handling code here:
+        gana far = new gana();
+           jDesktopPane1.add(far);
+        far.setVisible(true);
+ //       String dir="";  
+ //           visualizador(dir1+dir+".pdf"); 
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+        // TODO add your handling code here:
+        totalFacturaHastaFecha far = new totalFacturaHastaFecha();
+           jDesktopPane1.add(far);
+        far.setVisible(true);
+ //       String dir="ventasFecha";  
+ //           visualizador(dir1+dir+".pdf"); 
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
+
+    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
+        // TODO add your handling code here:
+        totalPedidosHastaFecha far = new totalPedidosHastaFecha();
+           jDesktopPane1.add(far);
+        far.setVisible(true);
+ //       String dir="pedidosFecha";  
+ //           visualizador(dir1+dir+".pdf"); 
+    }//GEN-LAST:event_jMenuItem22ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -452,7 +588,7 @@ public class menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

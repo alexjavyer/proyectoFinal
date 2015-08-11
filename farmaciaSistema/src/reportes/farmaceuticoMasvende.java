@@ -5,6 +5,7 @@
 package reportes;
 
 import interfaces.conexion;
+import interfaces.menu;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -22,7 +23,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author Javy
  */
-public class farmaceuticoMasvende extends javax.swing.JFrame {
+public class farmaceuticoMasvende extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form medicamentoMasPedido
@@ -75,8 +76,8 @@ public class farmaceuticoMasvende extends javax.swing.JFrame {
                        JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/farmaceuticoQueMasVende.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"farmaceuticoQueMasVende"+".pdf");
-                       JasperViewer.viewReport(print);
-                       dispose();
+   //                    JasperViewer.viewReport(print);
+               //        dispose();
               //         
                        //principalBase ver = new principalBase();
                        
@@ -100,7 +101,7 @@ public class farmaceuticoMasvende extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,7 +119,7 @@ public class farmaceuticoMasvende extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("VER REPORTE");
+        jButton2.setText("GENERAR REPORTE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -141,7 +142,7 @@ public class farmaceuticoMasvende extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1))
             .addGroup(layout.createSequentialGroup()
-                .addGap(170, 170, 170)
+                .addGap(146, 146, 146)
                 .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -155,9 +156,9 @@ public class farmaceuticoMasvende extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,6 +172,8 @@ public class farmaceuticoMasvende extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         reporte();
+          String dir="farmaceuticoQueMasVende";  
+            menu.visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
