@@ -53,6 +53,9 @@ public class menu extends javax.swing.JFrame {
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem23 = new javax.swing.JMenuItem();
+        jMenuItem24 = new javax.swing.JMenuItem();
         jmAdministrador = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -163,32 +166,42 @@ public class menu extends javax.swing.JFrame {
 
         jMenu1.setText("REPORTES");
 
-        jMenuItem14.setText("jMenuItem14");
+        jMenuItem14.setText("CLIENTE QUÉ MÁS COMPRA");
         jMenu1.add(jMenuItem14);
 
-        jMenuItem15.setText("jMenuItem15");
+        jMenuItem15.setText("FARMACEUTICO QUÉ MÁS VENDE");
         jMenu1.add(jMenuItem15);
 
-        jMenuItem16.setText("jMenuItem15");
+        jMenuItem16.setText("MEDICAMENTOS MÁS PEDIDO");
         jMenu1.add(jMenuItem16);
 
-        jMenuItem17.setText("jMenuItem15");
+        jMenuItem17.setText("MEDICAMENTOS MÁS COMPRADO");
         jMenu1.add(jMenuItem17);
 
-        jMenuItem18.setText("jMenuItem15");
+        jMenuItem18.setText("VENTAS ENTRE DOS FECHAS");
         jMenu1.add(jMenuItem18);
 
-        jMenuItem19.setText("jMenuItem15");
+        jMenuItem19.setText("PEDIDOS ENTRE DOS FECHAS");
         jMenu1.add(jMenuItem19);
 
-        jMenuItem20.setText("jMenuItem15");
+        jMenuItem20.setText("GANANCIA DEL DÍA");
         jMenu1.add(jMenuItem20);
 
-        jMenuItem21.setText("jMenuItem15");
+        jMenuItem21.setText("TOTAL VENTAS HASTA LA FECHA");
         jMenu1.add(jMenuItem21);
 
-        jMenuItem22.setText("jMenuItem15");
+        jMenuItem22.setText("TOTAL PEDIDOS HASTA LA FECHA");
         jMenu1.add(jMenuItem22);
+
+        jMenu3.setText("FACTURAS");
+
+        jMenuItem23.setText("VENTAS");
+        jMenu3.add(jMenuItem23);
+
+        jMenuItem24.setText("PEDIDOS");
+        jMenu3.add(jMenuItem24);
+
+        jMenu1.add(jMenu3);
 
         jMenuBar1.add(jMenu1);
 
@@ -442,6 +455,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     public static javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -458,6 +472,8 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
+    private javax.swing.JMenuItem jMenuItem23;
+    private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

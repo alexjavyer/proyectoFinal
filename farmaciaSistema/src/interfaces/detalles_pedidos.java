@@ -27,6 +27,8 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
      */
     public detalles_pedidos() {
         initComponents();
+         getContentPane().setBackground(new java.awt.Color(10,120,200));
+        setTitle("D E T A L L E  P E D I D O S");
         jtbDetallesPedidos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             @Override
@@ -96,7 +98,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
             conexion cc = new conexion();
             Connection cn = cc.conectar();
             String sql = "";
-            sql = "SELECT * FROM PEDIDO ORDER BY NUM_PED";
+            sql = "SELECT * FROM pedidos ORDER BY NUM_PED";
             Statement psd = cn.createStatement();
             ResultSet rs = psd.executeQuery(sql);
             while (rs.next()) {
@@ -112,7 +114,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
             conexion cc = new conexion();
             Connection cn = cc.conectar();
             String sql = "";
-            sql = "SELECT * FROM MEDICAMENTOS ORDER BY COD_MED";
+            sql = "SELECT * FROM medicamentos ORDER BY COD_MED";
             Statement psd = cn.createStatement();
             ResultSet rs = psd.executeQuery(sql);
             while (rs.next()) {
@@ -130,7 +132,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
         model = new DefaultTableModel(null,titulo);
         String registros [] = new String[3];
         String sql,dato=txtBusqueda.getText();
-        sql = "select * from DETALLE_PEDIDO where COD_MED_P like '%"+dato+"%'";
+        sql = "select * from detalles_pedidos where COD_MED_P like '%"+dato+"%'";
         try{
         Statement psd = cn.createStatement();
         ResultSet rs = psd.executeQuery(sql);
@@ -151,7 +153,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
             conexion cc = new conexion();
             Connection cn = cc.conectar();
             String sql="";
-            sql="insert into DETALLE_PEDIDO (COD_MED_P,CANT_P,NUM_PED) values (?,?,?)";
+            sql="insert into detalles_pedidos (COD_MED_P,CANT_P,NUM_PED) values (?,?,?)";
             PreparedStatement psd = cn.prepareStatement(sql);
             psd.setString(1, txtCodigo.getText());
             psd.setInt(2, Integer.valueOf(txtCantidad.getText()));
@@ -185,7 +187,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
         conexion cc = new conexion();
         Connection cn = cc.conectar();
         String sql="";
-        sql="UPDATE DETALLE_PEDIDO SET CANT_P='"+txtCantidad.getText()+"' WHERE COD_MED_P = '"+txtCodigo.getText()+"' AND NUM_PED = '"+txtNumero.getText()+"' AND CANT_P = '"+txtCantidad.getText()+"'";
+        sql="UPDATE detalles_pedidos SET CANT_P='"+txtCantidad.getText()+"' WHERE COD_MED_P = '"+txtCodigo.getText()+"' AND NUM_PED = '"+txtNumero.getText()+"' AND CANT_P = '"+txtCantidad.getText()+"'";
         try{
             PreparedStatement psd = cn.prepareStatement(sql);
             if(psd.executeUpdate()>0){
@@ -205,7 +207,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
         conexion cc = new conexion();
         Connection cn = cc.conectar();
         String sql="";
-        sql="DELETE FROM detalle_pedido WHERE COD_MED_P = '"+txtCodigo.getText()+"' AND NUM_PED = '"+txtNumero.getText()+"' AND CANT_P = '"+txtCantidad.getText()+"'";
+        sql="DELETE FROM detalles_pedidos WHERE COD_MED_P = '"+txtCodigo.getText()+"' AND NUM_PED = '"+txtNumero.getText()+"' AND CANT_P = '"+txtCantidad.getText()+"'";
         try{
             PreparedStatement psd = cn.prepareStatement(sql);
             if(psd.executeUpdate()>0){
@@ -251,10 +253,12 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
         txtBusqueda = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbDetallesPedidos = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("DETALLE DE PEDIDOS");
 
+        jpnDatos.setBackground(new java.awt.Color(10, 120, 200));
         jpnDatos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setText("Código Medicamento");
@@ -318,6 +322,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jpnBotones.setBackground(new java.awt.Color(10, 120, 200));
         jpnBotones.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jbtNuevo.setText("Nuevo");
@@ -394,6 +399,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
                 .addComponent(jbtSalir))
         );
 
+        jpnBusqueda.setBackground(new java.awt.Color(10, 120, 200));
         jpnBusqueda.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel4.setText("Busqueda");
@@ -433,6 +439,10 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jtbDetallesPedidos);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("D E T A L L E  P E D I D O S ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -447,11 +457,17 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jpnBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jpnBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpnDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -459,7 +475,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
                 .addComponent(jpnBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -545,6 +561,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtActualizar;
     private javax.swing.JButton jbtBorrar;
