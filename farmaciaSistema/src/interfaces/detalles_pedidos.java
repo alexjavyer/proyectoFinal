@@ -29,6 +29,23 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
         initComponents();
          getContentPane().setBackground(new java.awt.Color(10,120,200));
         setTitle("D E T A L L E  P E D I D O S");
+        
+         if(ingresoAlSistema.usuarios=="BODEGUERO"){
+         jbtActualizar.setEnabled(false);
+         jbtBorrar.setEnabled(false);
+         jbtCancelar.setEnabled(true);
+         jbtGuardar.setEnabled(true);
+         jbtNuevo.setEnabled(true);
+         jbtSalir.setEnabled(true);
+     }else{
+          jbtActualizar.setEnabled(true);
+         jbtBorrar.setEnabled(true);
+         jbtCancelar.setEnabled(true);
+         jbtGuardar.setEnabled(true);
+         jbtNuevo.setEnabled(true);
+         jbtSalir.setEnabled(true);
+         }
+        
         jtbDetallesPedidos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
             @Override
@@ -39,15 +56,24 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
                     txtCodigo.setText(jtbDetallesPedidos.getValueAt(fila, 0).toString());
                     txtCantidad.setText(jtbDetallesPedidos.getValueAt(fila, 1).toString());
                     txtNumero.setText(jtbDetallesPedidos.getValueAt(fila, 2).toString());
+                    
+                      if(ingresoAlSistema.usuarios=="BODEGUERO"){
+                    jbtActualizar.setEnabled(false);
+                    jbtBorrar.setEnabled(false);
+                    jbtCancelar.setEnabled(true);  
+                    
+                      }else{       
+                    
                     jbtActualizar.setEnabled(true);
                     jbtBorrar.setEnabled(true);
                     jbtCancelar.setEnabled(true);                   
+             }
              }
             }
         }
         );
         bloquear();
-        botonesIniciales();
+        //botonesIniciales();
         cargarDetallePedidos();
         CargarPedido();
         CargarMedicamento();
@@ -325,42 +351,42 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
         jpnBotones.setBackground(new java.awt.Color(10, 120, 200));
         jpnBotones.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jbtNuevo.setText("Nuevo");
+        jbtNuevo.setText("NUEVO");
         jbtNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtNuevoActionPerformed(evt);
             }
         });
 
-        jbtGuardar.setText("Guardar");
+        jbtGuardar.setText("GUARDAR");
         jbtGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtGuardarActionPerformed(evt);
             }
         });
 
-        jbtCancelar.setText("Cancelar");
+        jbtCancelar.setText("CANDELAR");
         jbtCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtCancelarActionPerformed(evt);
             }
         });
 
-        jbtActualizar.setText("Actualizar");
+        jbtActualizar.setText("ACTUALIZAR");
         jbtActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtActualizarActionPerformed(evt);
             }
         });
 
-        jbtBorrar.setText("Borrar");
+        jbtBorrar.setText("BORRAR");
         jbtBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtBorrarActionPerformed(evt);
             }
         });
 
-        jbtSalir.setText("Salir");
+        jbtSalir.setText("SALIR");
         jbtSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtSalirActionPerformed(evt);
@@ -373,14 +399,14 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
             jpnBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnBotonesLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(jpnBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtSalir)
-                    .addComponent(jbtBorrar)
-                    .addComponent(jbtActualizar)
-                    .addComponent(jbtCancelar)
-                    .addComponent(jbtGuardar)
-                    .addComponent(jbtNuevo))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jpnBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbtActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnBotonesLayout.setVerticalGroup(
             jpnBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,7 +501,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
                 .addComponent(jpnBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -563,12 +589,12 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbtActualizar;
-    private javax.swing.JButton jbtBorrar;
-    private javax.swing.JButton jbtCancelar;
-    private javax.swing.JButton jbtGuardar;
-    private javax.swing.JButton jbtNuevo;
-    private javax.swing.JButton jbtSalir;
+    public static javax.swing.JButton jbtActualizar;
+    public static javax.swing.JButton jbtBorrar;
+    public static javax.swing.JButton jbtCancelar;
+    public static javax.swing.JButton jbtGuardar;
+    public static javax.swing.JButton jbtNuevo;
+    public static javax.swing.JButton jbtSalir;
     private javax.swing.JComboBox jcbMedicamento;
     private javax.swing.JComboBox jcbPedido;
     private javax.swing.JPanel jpnBotones;

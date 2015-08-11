@@ -7,6 +7,7 @@ package reportes;
 import interfaces.conexion;
 import interfaces.menu;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -63,19 +64,19 @@ public class facturasEntreDosFechasSuma extends javax.swing.JInternalFrame {
     }
      String dir1="C:\\ReportesFinal\\";
       void reporte(){
-          String f1=new SimpleDateFormat("dd/MM/yy").format(fecha1.getDate());
-         String f2=new SimpleDateFormat("dd/MM/yy").format(fecha2.getDate()); 
+          String f1=new SimpleDateFormat("dd/MM/yyyy").format(fecha1.getDate());
+         String f2=new SimpleDateFormat("dd/MM/yyyy").format(fecha2.getDate()); 
   
            try {
                        Map parametros = new HashMap();
-                       parametros.put("fecha1", f1);
-                       parametros.put("fecha2", f2);
+                       parametros.put("fecha1", fecha1.getDate());
+                       parametros.put("fecha2", fecha2.getDate());
                        conexion miConexion = new conexion();
                        JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/facturaEntreDosFechas.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"facturaEntreDosFechas"+".pdf");
         //               JasperViewer.viewReport(print);
-               //        dispose();
+               //        dispose();facturaEntreDosFechas
               //         
                        //principalBase ver = new principalBase();
                        
@@ -198,7 +199,7 @@ public class facturasEntreDosFechasSuma extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
          facturasEntreDosFechasSuma();
          reporte();
-         String dir="";  
+         String dir="facturaEntreDosFechas";  
          menu.visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jButton1ActionPerformed
 

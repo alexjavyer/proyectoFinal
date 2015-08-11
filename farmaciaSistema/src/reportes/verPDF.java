@@ -81,7 +81,7 @@ public class verPDF extends JInternalFrame {
 			
 		});
                 
-                JButton salir = new JButton("Salir");
+                JButton salir = new JButton("SALIR");
 		salir.addActionListener(new ActionListener(){
 
 			@Override

@@ -31,10 +31,36 @@ public class medicamentos extends javax.swing.JInternalFrame {
         int fila=0;
     static DefaultTableModel model;
     public medicamentos() {
-        initComponents();
+     initComponents();
+     
+     if(ingresoAlSistema.usuarios=="BODEGUERO"){
+         btnActualizar.setEnabled(false);
+         btnBorrar.setEnabled(false);
+         btnCancelar.setEnabled(false);
+         btnIngreso.setEnabled(false);
+         btnNuevo.setEnabled(false);
+         btnSalir.setEnabled(true);
+     }else{
+         if(ingresoAlSistema.usuarios=="FARMACEUTICO"){
+         btnActualizar.setEnabled(false);
+         btnBorrar.setEnabled(false);
+         btnCancelar.setEnabled(false);
+         btnIngreso.setEnabled(false);
+         btnNuevo.setEnabled(false);
+         btnSalir.setEnabled(true);
+     }else{
+          btnActualizar.setEnabled(true);
+         btnBorrar.setEnabled(true);
+         btnCancelar.setEnabled(true);
+         btnIngreso.setEnabled(true);
+         btnNuevo.setEnabled(true);
+         btnSalir.setEnabled(true);   
+         }
+     }
+     
      cargarTabla("");
       //  botonesIniciales();
-  getContentPane().setBackground(new java.awt.Color(12,120,200));      
+        getContentPane().setBackground(new java.awt.Color(12,120,200));      
         setBounds(0, 0, 500, 455);
         setTitle("M E D I C A M E N T O S");  
         tblFarmaceuticos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -262,7 +288,7 @@ public class medicamentos extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         btnIngreso = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -338,6 +364,8 @@ public class medicamentos extends javax.swing.JInternalFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("FECHA CADUCACION");
 
+        jPanel1.setBackground(new java.awt.Color(10, 120, 200));
+
         btnIngreso.setText("GUARDAR");
         btnIngreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -352,10 +380,10 @@ public class medicamentos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("SALIR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setText("SALIR");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
@@ -398,7 +426,7 @@ public class medicamentos extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnActualizar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -415,7 +443,7 @@ public class medicamentos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnSalir)
                 .addGap(25, 25, 25))
         );
 
@@ -471,7 +499,7 @@ public class medicamentos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -529,9 +557,9 @@ public class medicamentos extends javax.swing.JInternalFrame {
         botonActualizar();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void txtMedPrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMedPrecioFocusLost
         // TODO add your handling code here:
@@ -598,12 +626,12 @@ public class medicamentos extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnBorrar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnIngreso;
-    private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton jButton1;
+    public javax.swing.JButton btnActualizar;
+    public javax.swing.JButton btnBorrar;
+    public javax.swing.JButton btnCancelar;
+    public javax.swing.JButton btnIngreso;
+    public javax.swing.JButton btnNuevo;
+    public javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

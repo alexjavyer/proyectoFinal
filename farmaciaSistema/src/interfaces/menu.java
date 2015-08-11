@@ -52,7 +52,7 @@ public class menu extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        jmReportes = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem15 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
@@ -173,7 +173,7 @@ public class menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jmBodegueros);
 
-        jMenu1.setText("REPORTES");
+        jmReportes.setText("REPORTES");
 
         jMenuItem14.setText("CLIENTE QUÉ MÁS COMPRA");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +181,7 @@ public class menu extends javax.swing.JFrame {
                 jMenuItem14ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem14);
+        jmReportes.add(jMenuItem14);
 
         jMenuItem15.setText("FARMACEUTICO QUÉ MÁS VENDE");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +189,7 @@ public class menu extends javax.swing.JFrame {
                 jMenuItem15ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem15);
+        jmReportes.add(jMenuItem15);
 
         jMenuItem16.setText("MEDICAMENTOS MÁS PEDIDO");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +197,7 @@ public class menu extends javax.swing.JFrame {
                 jMenuItem16ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem16);
+        jmReportes.add(jMenuItem16);
 
         jMenuItem17.setText("MEDICAMENTOS MÁS COMPRADO");
         jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +205,7 @@ public class menu extends javax.swing.JFrame {
                 jMenuItem17ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem17);
+        jmReportes.add(jMenuItem17);
 
         jMenuItem18.setText("VENTAS ENTRE DOS FECHAS");
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
@@ -213,7 +213,7 @@ public class menu extends javax.swing.JFrame {
                 jMenuItem18ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem18);
+        jmReportes.add(jMenuItem18);
 
         jMenuItem19.setText("PEDIDOS ENTRE DOS FECHAS");
         jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
@@ -221,7 +221,7 @@ public class menu extends javax.swing.JFrame {
                 jMenuItem19ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem19);
+        jmReportes.add(jMenuItem19);
 
         jMenuItem20.setText("GANANCIA DEL DÍA");
         jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
@@ -229,7 +229,7 @@ public class menu extends javax.swing.JFrame {
                 jMenuItem20ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem20);
+        jmReportes.add(jMenuItem20);
 
         jMenuItem21.setText("TOTAL VENTAS HASTA LA FECHA");
         jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
@@ -237,7 +237,7 @@ public class menu extends javax.swing.JFrame {
                 jMenuItem21ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem21);
+        jmReportes.add(jMenuItem21);
 
         jMenuItem22.setText("TOTAL PEDIDOS HASTA LA FECHA");
         jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +245,7 @@ public class menu extends javax.swing.JFrame {
                 jMenuItem22ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem22);
+        jmReportes.add(jMenuItem22);
 
         jMenu3.setText("FACTURAS");
 
@@ -255,9 +255,9 @@ public class menu extends javax.swing.JFrame {
         jMenuItem24.setText("PEDIDOS");
         jMenu3.add(jMenuItem24);
 
-        jMenu1.add(jMenu3);
+        jmReportes.add(jMenu3);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jmReportes);
 
         jmAdministrador.setText("USUARIOS");
 
@@ -589,8 +589,7 @@ public class menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    public javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     public static javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -620,6 +619,7 @@ public class menu extends javax.swing.JFrame {
     public javax.swing.JMenu jmAdministrador;
     public javax.swing.JMenu jmBodegueros;
     public javax.swing.JMenu jmFarmaceuticos;
+    public javax.swing.JMenu jmReportes;
     public static javax.swing.JPanel panelprincipal;
     // End of variables declaration//GEN-END:variables
 }

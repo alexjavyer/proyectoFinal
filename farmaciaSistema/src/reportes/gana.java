@@ -43,17 +43,20 @@ public class gana extends javax.swing.JInternalFrame {
          void gana(){
          conexion cc = new conexion();
                 Connection cn = cc.conectar();      
-                float contar=0,contar1=0;
-                String nombre="";
+                float contar=0;
+                
                 String sql = "";
                 String f1=new SimpleDateFormat("dd/MM/yyyy").format(fecha1.getDate());
-                try{
-                sql="SELECT SUM((total_ven)) as PROVEEDOR " +
-                    "FROM  VENTAS \n" +
-                    "WHERE FEC_HOR_VEN LIKE TO_DATE('"+f1+"','DD/MM/YYYY')";
-                
-                     TXT1.setText(String.valueOf(contar1));
-                        
+               
+                sql="SELECT SUM(TOTAL_ven) as suma "
+                        + "FROM ventas WHERE FEc_hor_ven >= TO_DATE('"+f1+"','DD/MM/YYYY') AND FEc_hor_ven<= TO_DATE('"+f1+"','DD/MM/YYYY')";
+               try {
+                    Statement psd  = cn.createStatement();
+                    ResultSet rs = psd.executeQuery(sql);                           
+                    while(rs.next()){
+                        contar = rs.getFloat("suma");
+                    }
+                           TXT1.setText(String.valueOf(contar));
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex);  
                 }
@@ -66,7 +69,7 @@ public class gana extends javax.swing.JInternalFrame {
     
            try {
                        Map parametros = new HashMap();
-                       parametros.put("fecha1", f1);
+                       parametros.put("fecha", fecha1.getDate());
                        conexion miConexion = new conexion();
                        JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/ventaDelDia.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
@@ -178,7 +181,7 @@ public class gana extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
          gana();
          reporte();
-         String dir="";  
+         String dir="ventaDelDia";  
          menu.visualizador(dir1+dir+".pdf"); 
 
     }//GEN-LAST:event_jButton1ActionPerformed

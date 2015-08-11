@@ -48,6 +48,24 @@ public class bodegueros extends javax.swing.JInternalFrame {
         botonesIniciales();
         bloquear();
         cargarTabla("");
+               getContentPane().setBackground(new java.awt.Color(10,120,200));
+        setTitle("B O D E G U E R O S");
+        if(ingresoAlSistema.usuarios=="BODEGUERO"){
+         btnActualizar.setEnabled(true);
+         btnBorrar.setEnabled(false);
+         btnCancelar.setEnabled(true);
+         btnGuardar.setEnabled(false);
+         btnNuevo.setEnabled(false);
+         btnSalir.setEnabled(true);
+     }else{
+          btnActualizar.setEnabled(true);
+         btnBorrar.setEnabled(true);
+         btnCancelar.setEnabled(true);
+         btnGuardar.setEnabled(true);
+         btnNuevo.setEnabled(true);
+         btnSalir.setEnabled(true);
+         }
+        
     //    cargarFoto();
         
         //cargar tabla
@@ -70,10 +88,15 @@ public class bodegueros extends javax.swing.JInternalFrame {
                     bytesImg = gestion.dirimg(abrir);
                     ImageIcon imagen = new ImageIcon(bytesImg);
                     lblIma.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(lblIma.getWidth(), lblIma.getHeight(), Image.SCALE_DEFAULT)));
- 
+ if(ingresoAlSistema.usuarios=="BODEGUERO"){
+                       btnActualizar.setEnabled(true);
+                    btnBorrar.setEnabled(false);
+                    btnCancelar.setEnabled(true);
+ }else{
                     btnActualizar.setEnabled(true);
                     btnBorrar.setEnabled(true);
                     btnCancelar.setEnabled(true);
+ }
              }
             }
         }
@@ -728,12 +751,12 @@ public class bodegueros extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnBorrar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnSalir;
+    public javax.swing.JButton btnActualizar;
+    public javax.swing.JButton btnBorrar;
+    public javax.swing.JButton btnCancelar;
+    public javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnNuevo;
+    public javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSubirFoto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

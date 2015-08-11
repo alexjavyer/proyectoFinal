@@ -33,6 +33,19 @@ public class detalles_ventas extends javax.swing.JFrame  {
         cargarTabla("");
        getContentPane().setBackground(new java.awt.Color(12,120,200));
         // botonesIniciales();
+        
+       if(ingresoAlSistema.usuarios=="FARMACEUTICO"){
+         btnActualizar.setEnabled(true);
+         btnBorrar.setEnabled(false);
+         btnIngreso.setEnabled(true);
+        
+     }else{
+          btnActualizar.setEnabled(true);
+         btnBorrar.setEnabled(true);
+         btnIngreso.setEnabled(true);
+     
+         }
+        
         cargarMedicamento();
         cargarVenta();
         setTitle("D E T A L L E  D E  L A  V E N T A");
@@ -605,10 +618,10 @@ void cargarVenta(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnBorrar;
-    private javax.swing.JButton btnIngreso;
-    private javax.swing.JButton jButton1;
+    public static javax.swing.JButton btnActualizar;
+    public static javax.swing.JButton btnBorrar;
+    public static javax.swing.JButton btnIngreso;
+    public static javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

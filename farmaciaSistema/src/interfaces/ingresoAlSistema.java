@@ -21,6 +21,9 @@ public class ingresoAlSistema extends javax.swing.JFrame {
     /**
      * Creates new form clientes
      */
+    
+    public static String usuarios="";
+    
     public ingresoAlSistema() {
         initComponents();
         lblAviso.setVisible(false);
@@ -58,8 +61,9 @@ public class ingresoAlSistema extends javax.swing.JFrame {
                  mn.jmAdministrador.setEnabled(true);
                  mn.jmBodegueros.setEnabled(true);
                  mn.jmFarmaceuticos.setEnabled(true);
-//                 mn.jmVentas.setEnabled(false);
-                 }
+                 mn.jmReportes.setEnabled(true);
+                 usuarios="ADMINISTRADOR";
+                }
                  else if(rs.getString("TIP_USU").equals("FARMACEUTICO"))
                  {
                  menu mn=new menu();
@@ -69,7 +73,8 @@ public class ingresoAlSistema extends javax.swing.JFrame {
                  mn.jmAdministrador.setEnabled(false);
                  mn.jmBodegueros.setEnabled(false);
                  mn.jmFarmaceuticos.setEnabled(true);
-                 
+                 mn.jmReportes.setEnabled(false);
+                  usuarios="FARMACEUTICO";
                  }
                  else if(rs.getString("TIP_USU").equals("BODEGUERO"))
                  {
@@ -80,8 +85,10 @@ public class ingresoAlSistema extends javax.swing.JFrame {
 
                  mn.jmAdministrador.setEnabled(false);
                  mn.jmFarmaceuticos.setEnabled(false);
-                 mn.jmBodegueros.setEnabled(true);
-
+                 mn.jmBodegueros.setEnabled(true);  
+                 mn.jmReportes.setEnabled(false);
+                 usuarios="BODEGUERO";
+                
                  }
                lblAviso.setVisible(false);   
              }    

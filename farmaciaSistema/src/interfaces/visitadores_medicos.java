@@ -42,7 +42,26 @@ DefaultTableModel model;
      */
     public visitadores_medicos() {
         initComponents();
-            botonesIniciales();
+        //botonesIniciales();
+        
+
+         if(ingresoAlSistema.usuarios=="BODEGUERO"){
+         btnActualizar.setEnabled(true);
+         btnBorrar.setEnabled(false);
+         btnCancelar.setEnabled(true);
+         btnGuardar.setEnabled(true);
+         btnNuevo.setEnabled(true);
+         btnSalir.setEnabled(true);
+     }else{
+          btnActualizar.setEnabled(true);
+         btnBorrar.setEnabled(true);
+         btnCancelar.setEnabled(true);
+         btnGuardar.setEnabled(true);
+         btnNuevo.setEnabled(true);
+         btnSalir.setEnabled(true);
+         }
+     
+        
         bloquear();
         cargarTabla("");
         getContentPane().setBackground(new java.awt.Color(10,120,200));
@@ -61,9 +80,18 @@ DefaultTableModel model;
                     txtBodApellido.setText(jTable2.getValueAt(fila, 2).toString());
                    txtBodCedula.setEnabled(false);
    
-                    btnActualizar.setEnabled(true);
+                   if(ingresoAlSistema.usuarios=="BODEGUERO"){
+        btnActualizar.setEnabled(false);
+                    btnBorrar.setEnabled(false);
+                    btnCancelar.setEnabled(false);
+     }else{
+          btnActualizar.setEnabled(true);
                     btnBorrar.setEnabled(true);
                     btnCancelar.setEnabled(true);
+         } 
+                   
+                   
+                   
              }
             }
         }
@@ -607,18 +635,18 @@ DefaultTableModel model;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnBorrar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnNuevo;
-    private javax.swing.JButton btnSalir;
+    public javax.swing.JButton btnActualizar;
+    public javax.swing.JButton btnBorrar;
+    public javax.swing.JButton btnCancelar;
+    public javax.swing.JButton btnGuardar;
+    public javax.swing.JButton btnNuevo;
+    public javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;

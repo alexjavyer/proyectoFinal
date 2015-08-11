@@ -49,7 +49,7 @@ public class pedidosEntreDosFechasSuma extends javax.swing.JInternalFrame {
                 String f2=new SimpleDateFormat("dd/MM/yyyy").format(fecha2.getDate());
                 
                 String sql = "";
-                sql="SELECT SUM(TOTAL_p) as suma FROM PEDIDOS WHERE FECHA >= TO_DATE('"+f1+"','DD/MM/YYYY') AND FECHA<= TO_DATE('"+f2+"','DD/MM/YYYY')";
+                sql="SELECT SUM(TOTAL_ped) as suma FROM PEDIDOS WHERE FEC_hor_ped >= TO_DATE('"+f1+"','DD/MM/YYYY') AND FEC_hor_ped<= TO_DATE('"+f2+"','DD/MM/YYYY')";
                try {
                     Statement psd  = cn.createStatement();
                     ResultSet rs = psd.executeQuery(sql);                           
@@ -68,8 +68,8 @@ void reporte(){
   
            try {
                        Map parametros = new HashMap();
-                       parametros.put("fecha1", f1);
-                       parametros.put("fecha2", f2);
+                       parametros.put("fecha1", fecha1.getDate());
+                       parametros.put("fecha2", fecha2.getDate());
                        conexion miConexion = new conexion();
                        JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/pedidoEntreDosFechas.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
@@ -197,7 +197,7 @@ void reporte(){
         // TODO add your handling code here:
          pedidosEntreDosFechasSuma();
 reporte();
-String dir="";  
+String dir="pedidoEntreDosFechas";  
          menu.visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
