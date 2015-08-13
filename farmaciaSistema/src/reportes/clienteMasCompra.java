@@ -17,7 +17,6 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -28,7 +27,7 @@ public class clienteMasCompra extends javax.swing.JInternalFrame {
     /**
      * Creates new form medicamentoMasPedido
      */
-    String dir1="C:\\ReportesFinal\\";
+    String dir1="/home/javy/Escritorio/ReportesFinal/";
     public clienteMasCompra() {
         initComponents();
         clienteMasCompra();
@@ -71,9 +70,9 @@ public class clienteMasCompra extends javax.swing.JInternalFrame {
                        Map parametros = new HashMap();
                        parametros.put("cedula", txtCodigo.getText());
                        conexion miConexion = new conexion();
-                       JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/cleinteQueMasCompra.jrxml");
+                       JasperReport reporte = JasperCompileManager.compileReport("/home/javy/Escritorio/ReportesFinal/cleinteQueMasCompra.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
-                       JasperExportManager.exportReportToPdfFile( print, dir1+"cleinteQueMasCompra"+".pdf");
+                       JasperExportManager.exportReportToPdfFile(print, "/home/javy/Escritorio/ReportesFinal/cleinteQueMasCompra"+".pdf");
                  //      JasperViewer.viewReport(print);
                  //      dispose();
               //         

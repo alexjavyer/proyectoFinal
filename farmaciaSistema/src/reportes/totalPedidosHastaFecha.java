@@ -65,14 +65,14 @@ public class totalPedidosHastaFecha extends javax.swing.JInternalFrame {
  
 
        
-    String dir1="C:\\ReportesFinal\\";
-    
+  //  String dir1="C:\\ReportesFinal\\";
+    String dir1="/home/javy/Escritorio/ReportesFinal/";
       void reporte(){
       
            try {
                        Map parametros = new HashMap();
                        conexion miConexion = new conexion();
-                       JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/pedidosFecha.jrxml");
+                       JasperReport reporte = JasperCompileManager.compileReport(dir1+"pedidosFecha.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"pedidosFecha"+".pdf");
             //           JasperViewer.viewReport(print);

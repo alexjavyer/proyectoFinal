@@ -10,8 +10,8 @@
      ventas."ci_far_per" AS ventas_ci_far_per
 FROM
      "public"."ventas" ventas
-where 
-ventas."fec_hor_ven" >= $P{fecha} and  ventas."fec_hor_ven" <= $P{fecha}]]>
+WHERE
+  ventas."fec_hor_ven">= $P{fecha} and ventas."fec_hor_ven"<=$P{fecha}]]>
 	</queryString>
 	<field name="ventas_num_ven" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -52,46 +52,46 @@ ventas."fec_hor_ven" >= $P{fecha} and  ventas."fec_hor_ven" <= $P{fecha}]]>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band splitType="Stretch">
+		<band height="18" splitType="Stretch">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="111" height="18" forecolor="#FFFFFF" backcolor="#999999"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[NUMERO ]]></text>
+				<text><![CDATA[ventas_num_ven]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="111" y="0" width="111" height="18" forecolor="#FFFFFF" backcolor="#999999"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[FECHA]]></text>
+				<text><![CDATA[ventas_fec_hor_ven]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="222" y="0" width="111" height="18" forecolor="#FFFFFF" backcolor="#999999"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[TOTAL]]></text>
+				<text><![CDATA[ventas_total_ven]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="333" y="0" width="111" height="18" forecolor="#FFFFFF" backcolor="#999999"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[CLIENTE]]></text>
+				<text><![CDATA[ventas_ci_cli_per]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="444" y="0" width="111" height="18" forecolor="#FFFFFF" backcolor="#999999"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[FARMACEUTICO]]></text>
+				<text><![CDATA[ventas_ci_far_per]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="43" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="111" height="20"/>
 				<textElement>

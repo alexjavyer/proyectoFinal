@@ -67,13 +67,14 @@ public class farmaceuticoMasvende extends javax.swing.JInternalFrame {
        
        
     
-     String dir1="C:\\ReportesFinal\\";
+  //   String dir1="C:\\ReportesFinal\\";
+       String dir1="/home/javy/Escritorio/ReportesFinal/";
      void reporte(){
            try {
                        Map parametros = new HashMap();
                        parametros.put("cedula", txtCodigo.getText());
                        conexion miConexion = new conexion();
-                       JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/farmaceuticoQueMasVende.jrxml");
+                       JasperReport reporte = JasperCompileManager.compileReport(dir1+"farmaceuticoQueMasVende.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"farmaceuticoQueMasVende"+".pdf");
    //                    JasperViewer.viewReport(print);

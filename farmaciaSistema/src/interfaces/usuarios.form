@@ -221,7 +221,7 @@
                       <Component id="txtUsuNombre" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtUsuApellido" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtUsuCedula" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtUsuClave" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtUsuClave" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -247,10 +247,10 @@
                   </Group>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtUsuClave" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtUsuClave" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <EmptySpace pref="17" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jcbTipo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -268,8 +268,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="CLAVE:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtUsuClave">
         </Component>
         <Component class="javax.swing.JTextField" name="txtUsuApellido">
           <Events>
@@ -329,6 +327,11 @@
             <Property name="text" type="java.lang.String" value="TIPO DE USUARIO:"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JPasswordField" name="txtUsuClave">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -374,7 +377,7 @@
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtBodBusqueda" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

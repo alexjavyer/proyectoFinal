@@ -64,13 +64,14 @@ public class medicamentoMasComprado extends javax.swing.JInternalFrame {
                 }
     }
       
-      String dir1="C:\\ReportesFinal\\";
+ //     String dir1="C:\\ReportesFinal\\";
+     String dir1="/home/javy/Escritorio/ReportesFinal/";
       void reporte(){
            try {
                        Map parametros = new HashMap();
                        parametros.put("codigo", txtCodigo.getText());
                        conexion miConexion = new conexion();
-                       JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/medicamentoMasComprado.jrxml");
+                       JasperReport reporte = JasperCompileManager.compileReport(dir1+"medicamentoMasComprado.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"medicamentoMasComprado"+".pdf");
         //               JasperViewer.viewReport(print);

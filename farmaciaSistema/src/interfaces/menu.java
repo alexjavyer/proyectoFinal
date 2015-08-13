@@ -19,18 +19,19 @@ public class menu extends javax.swing.JFrame {
     public menu() {
         initComponents();
 //        jDesktopPane1.setBorder(new ImagenFondo());
-                 setExtendedState(menu.MAXIMIZED_BOTH);
-          setTitle("F A R M A C I A");
+        setExtendedState(menu.MAXIMIZED_BOTH);
+        setTitle("F A R M A C I A");
     }
-    String dir1="C:\\ReportesFinal\\";
-    public static void visualizador(String path){
-          verPDF p=new verPDF(path);		
-	  //p.setDefaultCloseOperation(EXIT_ON_CLOSE);
-	  p.setVisible(true);
-	  p.setBounds(0, 0, 500, 680);
-          jDesktopPane1.add(p);
-          p.setMaximizable(true);
-          p.show();
+    String dir1 = "C:\\ReportesFinal\\";
+
+    public static void visualizador(String path) {
+        verPDF p = new verPDF(path);
+        //p.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        p.setVisible(true);
+        p.setBounds(0, 0, 500, 680);
+        jDesktopPane1.add(p);
+        p.setMaximizable(true);
+        p.show();
     }
 
     @SuppressWarnings("unchecked")
@@ -318,7 +319,7 @@ public class menu extends javax.swing.JFrame {
 //        }
 //    far.show();
         Mostrar_Farmaceuticos far = new Mostrar_Farmaceuticos();
-           jDesktopPane1.add(far);
+        jDesktopPane1.add(far);
         far.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -362,8 +363,8 @@ public class menu extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, ex);
 //        }
 //    ped.show();
-         pedidos far = new pedidos();
-           jDesktopPane1.add(far);
+        pedidos far = new pedidos();
+        jDesktopPane1.add(far);
         far.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
@@ -407,8 +408,8 @@ public class menu extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, ex);
 //        }
 //    bod.show();
-                Mostrar_Bodegueros far = new Mostrar_Bodegueros();
-           jDesktopPane1.add(far);
+        Mostrar_Bodegueros far = new Mostrar_Bodegueros();
+        jDesktopPane1.add(far);
         far.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
@@ -423,7 +424,7 @@ public class menu extends javax.swing.JFrame {
 //        }
 //    vis.show();
         visitadores_medicos far = new visitadores_medicos();
-           jDesktopPane1.add(far);
+        jDesktopPane1.add(far);
         far.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
@@ -437,14 +438,14 @@ public class menu extends javax.swing.JFrame {
 //            JOptionPane.showMessageDialog(null, ex);
 //        }
 //    med.show();os
-                medicamentos far = new medicamentos();
-           jDesktopPane1.add(far);
+        medicamentos far = new medicamentos();
+        jDesktopPane1.add(far);
         far.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         // TODO add your handling code here:
-         dispose();
+        dispose();
         ingresoAlSistema ingre = new ingresoAlSistema();
         ingre.show();
     }//GEN-LAST:event_jMenuItem12ActionPerformed
@@ -458,31 +459,31 @@ public class menu extends javax.swing.JFrame {
         // TODO add your handling code here:
         farmaceuticos far = new farmaceuticos();
         //far.show();
-           jDesktopPane1.add(far);
+        jDesktopPane1.add(far);
         far.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         // TODO add your handling code here:
-           bodegueros far = new bodegueros();
-           jDesktopPane1.add(far);
+        bodegueros far = new bodegueros();
+        jDesktopPane1.add(far);
         far.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         // TODO add your handling code here:
-           clienteMasCompra far = new clienteMasCompra();
-           jDesktopPane1.add(far);
-           far.setVisible(true);
+        clienteMasCompra far = new clienteMasCompra();
+        jDesktopPane1.add(far);
+        far.setVisible(true);
 //            String dir="cleinteQueMasCompra";  
 //            visualizador(dir1+dir+".pdf"); 
-           
+
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
         farmaceuticoMasvende far = new farmaceuticoMasvende();
-           jDesktopPane1.add(far);
+        jDesktopPane1.add(far);
         far.setVisible(true);
 //        String dir="farmaceuticoQueMasVende";  
 //            visualizador(dir1+dir+".pdf"); 
@@ -491,7 +492,7 @@ public class menu extends javax.swing.JFrame {
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
         // TODO add your handling code here:
         medicamentoMasPedido far = new medicamentoMasPedido();
-           jDesktopPane1.add(far);
+        jDesktopPane1.add(far);
         far.setVisible(true);
 //        String dir="medicamentoMasPedido";  
 //            visualizador(dir1+dir+".pdf"); 
@@ -499,56 +500,56 @@ public class menu extends javax.swing.JFrame {
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         // TODO add your handling code here:
-         medicamentoMasComprado far = new medicamentoMasComprado();
-           jDesktopPane1.add(far);
+        medicamentoMasComprado far = new medicamentoMasComprado();
+        jDesktopPane1.add(far);
         far.setVisible(true);
- //       String dir="medicamentoMasComprado";  
- //           visualizador(dir1+dir+".pdf"); 
+        //       String dir="medicamentoMasComprado";  
+        //           visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
         // TODO add your handling code here:
         facturasEntreDosFechasSuma far = new facturasEntreDosFechasSuma();
-           jDesktopPane1.add(far);
+        jDesktopPane1.add(far);
         far.setVisible(true);
- //       String dir="";  
- //           visualizador(dir1+dir+".pdf"); 
+        //       String dir="";  
+        //           visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
         // TODO add your handling code here:
-          pedidosEntreDosFechasSuma far = new pedidosEntreDosFechasSuma();
-           jDesktopPane1.add(far);
+        pedidosEntreDosFechasSuma far = new pedidosEntreDosFechasSuma();
+        jDesktopPane1.add(far);
         far.setVisible(true);
- //       String dir="";  
- //           visualizador(dir1+dir+".pdf"); 
+        //       String dir="";  
+        //           visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
         // TODO add your handling code here:
         gana far = new gana();
-           jDesktopPane1.add(far);
+        jDesktopPane1.add(far);
         far.setVisible(true);
- //       String dir="";  
- //           visualizador(dir1+dir+".pdf"); 
+        //       String dir="";  
+        //           visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
         // TODO add your handling code here:
         totalFacturaHastaFecha far = new totalFacturaHastaFecha();
-           jDesktopPane1.add(far);
+        jDesktopPane1.add(far);
         far.setVisible(true);
- //       String dir="ventasFecha";  
- //           visualizador(dir1+dir+".pdf"); 
+        //       String dir="ventasFecha";  
+        //           visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
         // TODO add your handling code here:
         totalPedidosHastaFecha far = new totalPedidosHastaFecha();
-           jDesktopPane1.add(far);
+        jDesktopPane1.add(far);
         far.setVisible(true);
- //       String dir="pedidosFecha";  
- //           visualizador(dir1+dir+".pdf"); 
+        //       String dir="pedidosFecha";  
+        //           visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     /**
@@ -586,7 +587,6 @@ public class menu extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane jDesktopPane1;
     public javax.swing.JMenu jMenu2;

@@ -8,7 +8,8 @@
      clientes."ape_cli" AS clientes_ape_cli
 FROM
      "public"."clientes" clientes
-where clientes."ci_cli" = $P{cedula}]]>
+where 
+clientes."ci_cli" = $P{cedula}]]>
 	</queryString>
 	<field name="clientes_ci_cli" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -35,7 +36,7 @@ where clientes."ci_cli" = $P{cedula}]]>
 				<textElement textAlignment="Center">
 					<font size="26" isBold="true"/>
 				</textElement>
-				<text><![CDATA[CLIENTE QUÉ MÁS VENDE]]></text>
+				<text><![CDATA[CLIENTE QUÉ MÁS COMPRA]]></text>
 			</staticText>
 		</band>
 	</title>

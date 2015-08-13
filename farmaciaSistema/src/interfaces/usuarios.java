@@ -7,16 +7,22 @@ package interfaces;
 
 import java.awt.Image;
 import java.io.File;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -207,6 +213,53 @@ public class usuarios extends javax.swing.JInternalFrame {
         }
     }
 
+    public String Encriptar(String texto){
+        String secretKey = "qualityinfosolutions"; //llave para encriptar datos
+        String base64EncryptedString = "";
+ 
+        try {
+ 
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
+            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+ 
+            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+            Cipher cipher = Cipher.getInstance("DESede");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+ 
+            byte[] plainTextBytes = texto.getBytes("utf-8");
+            byte[] buf = cipher.doFinal(plainTextBytes);
+            byte[] base64Bytes = Base64.encodeBase64(buf);
+            base64EncryptedString = new String(base64Bytes);
+ 
+        } catch (Exception ex) {
+        }
+        return base64EncryptedString;
+}
+    
+ public String Desencriptar(String textoEncriptado){
+ 
+ String secretKey = "qualityinfosolutions"; //llave para desenciptar datos
+        String base64EncryptedString = "";
+ 
+        try {
+            byte[] message = Base64.decodeBase64(textoEncriptado.getBytes("utf-8"));
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
+            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+ 
+            Cipher decipher = Cipher.getInstance("DESede");
+            decipher.init(Cipher.DECRYPT_MODE, key);
+ 
+            byte[] plainText = decipher.doFinal(message);
+ 
+            base64EncryptedString = new String(plainText, "UTF-8");
+ 
+        } catch (Exception ex) {
+        }
+        return base64EncryptedString;
+}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -221,7 +274,6 @@ public class usuarios extends javax.swing.JInternalFrame {
         btnSalir = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txtUsuClave = new javax.swing.JTextField();
         txtUsuApellido = new javax.swing.JTextField();
         txtUsuNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -230,6 +282,7 @@ public class usuarios extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jcbTipo = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
+        txtUsuClave = new javax.swing.JPasswordField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -359,6 +412,8 @@ public class usuarios extends javax.swing.JInternalFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("TIPO DE USUARIO:");
 
+        txtUsuClave.setText("jPasswordField1");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -398,9 +453,9 @@ public class usuarios extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsuClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtUsuClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -451,7 +506,7 @@ public class usuarios extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtBodBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
@@ -622,7 +677,7 @@ public class usuarios extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBodBusqueda;
     private javax.swing.JTextField txtUsuApellido;
     private javax.swing.JTextField txtUsuCedula;
-    private javax.swing.JTextField txtUsuClave;
+    private javax.swing.JPasswordField txtUsuClave;
     private javax.swing.JTextField txtUsuNombre;
     // End of variables declaration//GEN-END:variables
 }

@@ -62,7 +62,8 @@ public class facturasEntreDosFechasSuma extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, ex);  
                 }
     }
-     String dir1="C:\\ReportesFinal\\";
+//     String dir1="C:\\ReportesFinal\\";
+       String dir1="/home/javy/Escritorio/ReportesFinal/";
       void reporte(){
           String f1=new SimpleDateFormat("dd/MM/yyyy").format(fecha1.getDate());
          String f2=new SimpleDateFormat("dd/MM/yyyy").format(fecha2.getDate()); 
@@ -72,7 +73,7 @@ public class facturasEntreDosFechasSuma extends javax.swing.JInternalFrame {
                        parametros.put("fecha1", fecha1.getDate());
                        parametros.put("fecha2", fecha2.getDate());
                        conexion miConexion = new conexion();
-                       JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/facturaEntreDosFechas.jrxml");
+                       JasperReport reporte = JasperCompileManager.compileReport(dir1+"facturaEntreDosFechas.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"facturaEntreDosFechas"+".pdf");
         //               JasperViewer.viewReport(print);

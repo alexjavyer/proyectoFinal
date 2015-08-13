@@ -63,7 +63,8 @@ public class gana extends javax.swing.JInternalFrame {
          }
 
          
-     String dir1="C:\\ReportesFinal\\";
+    // String dir1="C:\\ReportesFinal\\";
+         String dir1="/home/javy/Escritorio/ReportesFinal/";
       void reporte(){
           String f1=new SimpleDateFormat("dd/MM/yy").format(fecha1.getDate());
     
@@ -71,7 +72,7 @@ public class gana extends javax.swing.JInternalFrame {
                        Map parametros = new HashMap();
                        parametros.put("fecha", fecha1.getDate());
                        conexion miConexion = new conexion();
-                       JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/ventaDelDia.jrxml");
+                       JasperReport reporte = JasperCompileManager.compileReport(dir1+"ventaDelDia.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"ventaDelDia"+".pdf");
                //        JasperViewer.viewReport(print);

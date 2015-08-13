@@ -60,13 +60,14 @@ public class totalFacturaHastaFecha extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, ex);  
                 }
     }
-   String dir1="C:\\ReportesFinal\\";
+  // String dir1="C:\\ReportesFinal\\";
+    String dir1="/home/javy/Escritorio/ReportesFinal/";
       void reporte(){
       
            try {
                        Map parametros = new HashMap();
                        conexion miConexion = new conexion();
-                       JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/ventasFecha.jrxml");
+                       JasperReport reporte = JasperCompileManager.compileReport(dir1+"ventasFecha.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"ventasFecha"+".pdf");
           //             JasperViewer.viewReport(print);

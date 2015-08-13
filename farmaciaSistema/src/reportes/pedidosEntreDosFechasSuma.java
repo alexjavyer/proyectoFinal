@@ -61,7 +61,8 @@ public class pedidosEntreDosFechasSuma extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, ex);  
                 }
     }
-        String dir1="C:\\ReportesFinal\\";
+       // String dir1="C:\\ReportesFinal\\";
+      String dir1="/home/javy/Escritorio/ReportesFinal/";
 void reporte(){
           String f1=new SimpleDateFormat("dd/MM/yy").format(fecha1.getDate());
          String f2=new SimpleDateFormat("dd/MM/yy").format(fecha2.getDate()); 
@@ -71,7 +72,7 @@ void reporte(){
                        parametros.put("fecha1", fecha1.getDate());
                        parametros.put("fecha2", fecha2.getDate());
                        conexion miConexion = new conexion();
-                       JasperReport reporte = JasperCompileManager.compileReport("C:/ReportesFinal/pedidoEntreDosFechas.jrxml");
+                       JasperReport reporte = JasperCompileManager.compileReport(dir1+"pedidoEntreDosFechas.jrxml");
                        JasperPrint print = JasperFillManager.fillReport(reporte, parametros ,miConexion.conectar());
                        JasperExportManager.exportReportToPdfFile( print, dir1+"pedidoEntreDosFechas"+".pdf");
          //              JasperViewer.viewReport(print);

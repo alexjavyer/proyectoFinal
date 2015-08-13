@@ -6,23 +6,25 @@
 package interfaces;
 
 import java.awt.Image;
-import static java.awt.image.ImageObserver.WIDTH;
 import java.io.File;
 import java.io.FileInputStream;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Arrays;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicListUI;
 import javax.swing.table.DefaultTableModel;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -48,17 +50,18 @@ public class bodegueros extends javax.swing.JInternalFrame {
         botonesIniciales();
         bloquear();
         cargarTabla("");
-               getContentPane().setBackground(new java.awt.Color(10,120,200));
+        getContentPane().setBackground(new java.awt.Color(10,120,200));
         setTitle("B O D E G U E R O S");
-        if(ingresoAlSistema.usuarios=="BODEGUERO"){
+        cargarFoto();
+        if(ingresoAlSistema.usuarios.equals("BODEGUERO")){
          btnActualizar.setEnabled(true);
          btnBorrar.setEnabled(false);
-         btnCancelar.setEnabled(true);
+         btnCancelar.setEnabled(false);
          btnGuardar.setEnabled(false);
          btnNuevo.setEnabled(false);
          btnSalir.setEnabled(true);
-     }else{
-          btnActualizar.setEnabled(true);
+         }else{
+         btnActualizar.setEnabled(true);
          btnBorrar.setEnabled(true);
          btnCancelar.setEnabled(true);
          btnGuardar.setEnabled(true);
@@ -66,7 +69,7 @@ public class bodegueros extends javax.swing.JInternalFrame {
          btnSalir.setEnabled(true);
          }
         
-    //    cargarFoto();
+        
         
         //cargar tabla
         
@@ -84,14 +87,16 @@ public class bodegueros extends javax.swing.JInternalFrame {
                     txtBodFoto.setText(jTable2.getValueAt(fila, 4).toString());
                    txtBodCedula.setEnabled(false);
              //mirar imagen
-                    File abrir = new File(jTable2.getValueAt(fila, 4).toString());
+                    File abrir = new File("/home/javy/Escritorio/FOTOSFARMACIA/"+jTable2.getValueAt(fila, 0).toString()+".jpg");
+                   //  File abrir = new File("C:\\FOTOSFARMACIA\\"+jTable2.getValueAt(fila, 4).toString());
                     bytesImg = gestion.dirimg(abrir);
+
                     ImageIcon imagen = new ImageIcon(bytesImg);
                     lblIma.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(lblIma.getWidth(), lblIma.getHeight(), Image.SCALE_DEFAULT)));
  if(ingresoAlSistema.usuarios=="BODEGUERO"){
                        btnActualizar.setEnabled(true);
                     btnBorrar.setEnabled(false);
-                    btnCancelar.setEnabled(true);
+                    btnCancelar.setEnabled(false);
  }else{
                     btnActualizar.setEnabled(true);
                     btnBorrar.setEnabled(true);
@@ -104,6 +109,7 @@ public class bodegueros extends javax.swing.JInternalFrame {
     }
    //tablas
     void cargarTabla(String dato){
+       
         conexion cc = new conexion();
         Connection cn = cc.conectar();
         String titulo[] = {"CEDULA","NOMBRE","APELLIDO","SUELDO","FOTO"};
@@ -123,6 +129,7 @@ public class bodegueros extends javax.swing.JInternalFrame {
             model.addRow(registros);
         }
         jTable2.setModel(model);
+    //    cargarFoto();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -158,6 +165,7 @@ public class bodegueros extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnSalir.setEnabled(true);
+        //cargarFoto();
     }
     
     void limpiar(){
@@ -205,7 +213,8 @@ public class bodegueros extends javax.swing.JInternalFrame {
             nombre = txtBodNombre.getText();
             apellido = txtBodApellido.getText();
             sueldo = Double.valueOf(txtBodSueldo.getText());
-            foto = "C:\\FOTOSFARMACIA\\"+txtBodCedula.getText()+".jpg";
+            foto = "/home/javy/Escritorio/FOTOSFARMACIA/"+txtBodCedula.getText()+".jpg";
+            //foto="C:\\FOTOSFARMACIA\\"+txtBodCedula.getText()+".jpg";
             // pasa la iamgen a c;\\Foto\\
             File archivoGuardar = new File (foto);       
             gestion.GuardarImagen(archivoGuardar,bytesImg); 
@@ -244,9 +253,11 @@ public class bodegueros extends javax.swing.JInternalFrame {
         conexion cc = new conexion();
         Connection cn = cc.conectar();
         String sql="";
-        File archivoGuardar = new File ("C:/FOTOSFARMACIA/"+txtBodCedula.getText()+".jpg");       
+        File archivoGuardar = new File ("/home/javy/Escritorio/FOTOSFARMACIA/"+txtBodCedula.getText()+".jpg");       
+        //File archivoGuardar = new File ("C:\\FOTOSFARMACIA\\"+txtBodCedula.getText()+".jpg");
         gestion.GuardarImagen(archivoGuardar,bytesImg);
-        sql="UPDATE bodegueros SET NOM_BOD='"+txtBodNombre.getText()+"',APE_BOD='"+txtBodApellido.getText()+"',sue_bod = '"+txtBodSueldo.getText()+"',foto_bod='"+"C:\\FOTOSFARMACIA\\"+txtBodCedula.getText()+".jpg"+"' WHERE CI_BOD='"+txtBodCedula.getText()+"'";
+//        sql="UPDATE bodegueros SET NOM_BOD='"+txtBodNombre.getText()+"',APE_BOD='"+txtBodApellido.getText()+"',sue_bod = '"+txtBodSueldo.getText()+"',foto_bod='"+"C:\\FOTOSFARMACIA\\"+txtBodCedula.getText()+".jpg"+"' WHERE CI_BOD='"+txtBodCedula.getText()+"'";
+          sql="UPDATE bodegueros SET NOM_BOD='"+txtBodNombre.getText()+"',APE_BOD='"+txtBodApellido.getText()+"',sue_bod = '"+txtBodSueldo.getText()+"',foto_bod='"+"/home/javy/Escritorio/FOTOSFARMACIA/"+txtBodCedula.getText()+".jpg"+"' WHERE CI_BOD='"+txtBodCedula.getText()+"'";
         try{
             PreparedStatement psd = cn.prepareStatement(sql);
             if(psd.executeUpdate()>0){
@@ -288,7 +299,8 @@ public class bodegueros extends javax.swing.JInternalFrame {
     
     // FOTOS
     void seleccionarFoto(){
-        String a="C:\\Users\\"+username+"\\Desktop\\Desktop\\autos\\";
+        String a="/home/javy/Escritorio/FOTOSFARMACIA/";
+        //String a="C:\\FOTOSFARMACIA\\";
         File archivo1 = new File(a);
         seleccionado.setSelectedFile(archivo1);
         if(seleccionado.showDialog(this,"ABRIR ARCHIVO")==JFileChooser.APPROVE_OPTION){
@@ -307,15 +319,20 @@ public class bodegueros extends javax.swing.JInternalFrame {
        }
       
       void cargarFoto(){
-          File abrir = new File("C:\\FOTOSFARMACIA\\caras.jpg");
+          File abrir = new File("//home/javy/Escritorio/FOTOSFARMACIA/caras.jpg");
+          //File abrir = new File("C:\\FOTOSFARMACIA\\caras.jpg");
                         bytesImg = gestion.dirimg(abrir);
                         ImageIcon imagen = new ImageIcon(bytesImg);
                         lblIma.setIcon(imagen);
-                        lblIma.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(lblIma.getWidth(), lblIma.getHeight(), Image.SCALE_DEFAULT)));
+                        //lblIma.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(lblIma.getWidth(), lblIma.getHeight(), Image.SCALE_DEFAULT)));
 
       }
     
     
+      
+      
+      
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
