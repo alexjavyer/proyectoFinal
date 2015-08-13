@@ -33,15 +33,15 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
          if(ingresoAlSistema.usuarios=="BODEGUERO"){
          jbtActualizar.setEnabled(false);
          jbtBorrar.setEnabled(false);
-         jbtCancelar.setEnabled(true);
-         jbtGuardar.setEnabled(true);
+         jbtCancelar.setEnabled(false);
+         jbtGuardar.setEnabled(false);
          jbtNuevo.setEnabled(true);
          jbtSalir.setEnabled(true);
      }else{
-          jbtActualizar.setEnabled(true);
-         jbtBorrar.setEnabled(true);
-         jbtCancelar.setEnabled(true);
-         jbtGuardar.setEnabled(true);
+        jbtActualizar.setEnabled(false);
+         jbtBorrar.setEnabled(false);
+         jbtCancelar.setEnabled(false);
+         jbtGuardar.setEnabled(false);
          jbtNuevo.setEnabled(true);
          jbtSalir.setEnabled(true);
          }
@@ -58,7 +58,7 @@ public class detalles_pedidos extends javax.swing.JInternalFrame {
                     txtNumero.setText(jtbDetallesPedidos.getValueAt(fila, 2).toString());
                     
                       if(ingresoAlSistema.usuarios=="BODEGUERO"){
-                    jbtActualizar.setEnabled(false);
+                    jbtActualizar.setEnabled(true);
                     jbtBorrar.setEnabled(false);
                     jbtCancelar.setEnabled(true);  
                     

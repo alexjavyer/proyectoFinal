@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author javy
  */
-public class detalles_ventas extends javax.swing.JFrame  {
+public class detalles_ventas extends javax.swing.JInternalFrame  {
 
     /**
      * Creates new form clientes
@@ -35,7 +35,7 @@ public class detalles_ventas extends javax.swing.JFrame  {
         // botonesIniciales();
         
        if(ingresoAlSistema.usuarios=="FARMACEUTICO"){
-         btnActualizar.setEnabled(true);
+         btnActualizar.setEnabled(false);
          btnBorrar.setEnabled(false);
          btnIngreso.setEnabled(true);
         
@@ -49,7 +49,7 @@ public class detalles_ventas extends javax.swing.JFrame  {
         cargarMedicamento();
         cargarVenta();
         setTitle("D E T A L L E  D E  L A  V E N T A");
-        setBounds(550, 0, 550, 465);
+        setBounds(0, 0, 580, 465);
         
         //setBounds(800, 0, 565, 500);
 //        venta.setText(ventas.txtVenNum.getText());
@@ -68,6 +68,18 @@ public class detalles_ventas extends javax.swing.JFrame  {
                     //txtFarSueldo.setText(tblFarmaceuticos.getValueAt(fila, 3).toString());
                   //  botonesDesbloqueados();
                   //  Bloquear();
+                    if(ingresoAlSistema.usuarios=="FARMACEUTICO"){
+         btnActualizar.setEnabled(true);
+         btnBorrar.setEnabled(false);
+         btnIngreso.setEnabled(true);
+        
+     }else{
+          btnActualizar.setEnabled(true);
+         btnBorrar.setEnabled(true);
+         btnIngreso.setEnabled(false);
+     
+         }
+        
                 }                    
                 //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }

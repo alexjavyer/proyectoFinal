@@ -27,11 +27,11 @@ public class clientes extends javax.swing.JInternalFrame {
 //        setBounds(500, 200, 390, 215);
         getContentPane().setBackground(new java.awt.Color(10,120,200));
         setTitle("C L I E N T E S");
-         if(ingresoAlSistema.usuarios=="FARMACEUTICO"){
-         btnActualizar.setEnabled(true);
+         if(ingresoAlSistema.usuarios.equals("FARMACEUTICO")){
+         btnActualizar.setEnabled(false);
          btnEliminar.setEnabled(false);
          btnCancelar.setEnabled(true);
-         btnGuardar.setEnabled(true);
+         btnGuardar.setEnabled(false);
          btnNuevo.setEnabled(true);
          btnSalir.setEnabled(true);
      }else{
@@ -54,8 +54,9 @@ public class clientes extends javax.swing.JInternalFrame {
                 txtCedula.setText(tblClientes.getValueAt(fila,0).toString());
                 txtNombre.setText(tblClientes.getValueAt(fila,1).toString());
                 txtApellido.setText(tblClientes.getValueAt(fila,2).toString());
-         if(ingresoAlSistema.usuarios=="FARMACEUTICO"){
+         if(ingresoAlSistema.usuarios.equals("FARMACEUTICO")){
                 btnEliminar.setEnabled(false);
+                btnActualizar.setEnabled(true);
          }else{
     
                 btnActualizar.setEnabled(true);

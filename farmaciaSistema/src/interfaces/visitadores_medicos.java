@@ -46,21 +46,20 @@ DefaultTableModel model;
         
 
          if(ingresoAlSistema.usuarios=="BODEGUERO"){
-         btnActualizar.setEnabled(true);
+         btnActualizar.setEnabled(false);
          btnBorrar.setEnabled(false);
-         btnCancelar.setEnabled(true);
-         btnGuardar.setEnabled(true);
+         btnCancelar.setEnabled(false);
+         btnGuardar.setEnabled(false);
          btnNuevo.setEnabled(true);
          btnSalir.setEnabled(true);
      }else{
-          btnActualizar.setEnabled(true);
-         btnBorrar.setEnabled(true);
-         btnCancelar.setEnabled(true);
-         btnGuardar.setEnabled(true);
+          btnActualizar.setEnabled(false);
+         btnBorrar.setEnabled(false);
+         btnCancelar.setEnabled(false);
+         btnGuardar.setEnabled(false);
          btnNuevo.setEnabled(true);
          btnSalir.setEnabled(true);
          }
-     
         
         bloquear();
         cargarTabla("");
@@ -81,7 +80,7 @@ DefaultTableModel model;
                    txtBodCedula.setEnabled(false);
    
                    if(ingresoAlSistema.usuarios=="BODEGUERO"){
-        btnActualizar.setEnabled(false);
+        btnActualizar.setEnabled(true);
                     btnBorrar.setEnabled(false);
                     btnCancelar.setEnabled(false);
      }else{

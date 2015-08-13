@@ -39,9 +39,9 @@ public class farmaceuticos extends javax.swing.JInternalFrame {
         });
         
         if(ingresoAlSistema.usuarios.equals("FARMACEUTICO")){
-         btnActualizar.setEnabled(true);
+         btnActualizar.setEnabled(false);
          btnEliminar.setEnabled(false);
-         btnCancelar.setEnabled(true);
+         btnCancelar.setEnabled(false);
          btnGuardar.setEnabled(false);
          btnNuevo.setEnabled(false);
          btnSalir.setEnabled(true);
@@ -60,6 +60,7 @@ public class farmaceuticos extends javax.swing.JInternalFrame {
             txtSueldo.setText(tblFarmaceuticos.getValueAt(fila,3).toString());
                if(ingresoAlSistema.usuarios=="FARMACEUTICO"){
          btnEliminar.setEnabled(false);
+         btnActualizar.setEnabled(true);
      }else{
             btnActualizar.setEnabled(true);
             txtCedula.setEnabled(true);

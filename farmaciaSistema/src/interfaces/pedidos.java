@@ -35,10 +35,10 @@ public class pedidos extends javax.swing.JInternalFrame {
         setTitle("P E D I D O S");
         
          if(ingresoAlSistema.usuarios=="BODEGUERO"){
-         jbtActualizar.setEnabled(true);
+         jbtActualizar.setEnabled(false);
          jbtBorrar.setEnabled(false);
-         jbtCancelar.setEnabled(true);
-         jbtGuardar.setEnabled(true);
+         jbtCancelar.setEnabled(false);
+         jbtGuardar.setEnabled(false);
          jbtNuevo.setEnabled(true);
          jbtSalir.setEnabled(true);
      }else{
@@ -58,9 +58,9 @@ public class pedidos extends javax.swing.JInternalFrame {
                     txtBodeguero.setText(jtbPedidos.getValueAt(fila, 3).toString());
                     txtVisitador.setText(jtbPedidos.getValueAt(fila, 4).toString());
                             if(ingresoAlSistema.usuarios=="BODEGUERO"){
-                    jbtActualizar.setEnabled(false);
+                    jbtActualizar.setEnabled(true);
                     jbtBorrar.setEnabled(false);
-                    jbtCancelar.setEnabled(false);
+                    jbtCancelar.setEnabled(true);
                             }else{
                     jbtActualizar.setEnabled(true);
                     jbtBorrar.setEnabled(true);
@@ -579,7 +579,7 @@ public class pedidos extends javax.swing.JInternalFrame {
     private void jbtDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDetallesActionPerformed
         // TODO add your handling code here:
         detalles_pedidos pe=new detalles_pedidos();
-        menu.panelprincipal.add(pe);
+        menu.jDesktopPane1.add(pe);
         pe.setVisible(true);
         pe.show();
     }//GEN-LAST:event_jbtDetallesActionPerformed
