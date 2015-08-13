@@ -5,7 +5,7 @@
 package reportes;
 
 import interfaces.conexion;
-import interfaces.menu;
+import interfaces.menu1;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -173,7 +173,7 @@ public class medicamentoMasComprado extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         reporte();
         String dir="medicamentoMasComprado";  
-        menu.visualizador(dir1+dir+".pdf"); 
+        menu1.visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

@@ -111,13 +111,13 @@ public class usuarios extends javax.swing.JInternalFrame {
             conexion cc = new conexion();
             Connection cn = cc.conectar();
             String sql="";
-            String cedula,nombre,apellido,clave,tipo;
+            String cedula,nombre,apellido,clave,tipo,encriptado;
             cedula = txtUsuCedula.getText();
             nombre = txtUsuNombre.getText();
             apellido = txtUsuApellido.getText();
             clave = txtUsuClave.getText();
             tipo= jcbTipo.getSelectedItem().toString();
-            
+            encriptado=Encriptar(clave);
             
             sql="insert into usuarios (ci_usu,nom_usu,ape_usu,cla_usu,foto_bod) values (?,?,?,?,?)";
             
@@ -125,7 +125,7 @@ public class usuarios extends javax.swing.JInternalFrame {
             psd.setString(1, cedula);
             psd.setString(2, nombre);
             psd.setString(3, apellido);
-            psd.setString(4, clave);
+            psd.setString(4, encriptado);
             psd.setString(5, tipo);
             int n=psd.executeUpdate();
             if(n>0){
@@ -148,7 +148,7 @@ public class usuarios extends javax.swing.JInternalFrame {
         sql="UPDATE usuarios SET "
                 + "nom_usu='"+txtUsuNombre.getText()+
                 "',ape_usu='"+txtUsuApellido.getText()+
-                "',cla_usu = '"+txtUsuClave.getText()+
+                "',cla_usu = '"+Encriptar(txtUsuClave.getText())+
                 "',tip_usu='"+jcbTipo.getSelectedItem().toString()+
                         "' WHERE ci_usu='"+txtUsuCedula.getText()+"'";
         try{
@@ -203,7 +203,7 @@ public class usuarios extends javax.swing.JInternalFrame {
             registros[0]=rs.getString("ci_usu");
             registros[1]=rs.getString("nom_usu");
             registros[2]=rs.getString("ape_usu");
-            registros[3]=rs.getString("cla_usu");
+            registros[3]=Desencriptar(rs.getString("cla_usu"));
             registros[4]=rs.getString("tip_usu");
             model.addRow(registros);
         }
@@ -412,8 +412,6 @@ public class usuarios extends javax.swing.JInternalFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("TIPO DE USUARIO:");
 
-        txtUsuClave.setText("jPasswordField1");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -506,7 +504,7 @@ public class usuarios extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtBodBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N

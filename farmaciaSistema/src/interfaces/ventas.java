@@ -752,7 +752,7 @@ public class ventas extends javax.swing.JInternalFrame {
     private void btnDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleActionPerformed
         // TODO add your handling code here:
         detalles_ventas deven = new detalles_ventas();
-        menu.jDesktopPane1.add(deven);
+        menu1.jDesktopPane1.add(deven);
         deven.setVisible(true);
         deven.show();
     }//GEN-LAST:event_btnDetalleActionPerformed

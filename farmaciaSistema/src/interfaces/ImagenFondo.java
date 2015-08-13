@@ -4,12 +4,6 @@
  */
 package interfaces;
 
-/**
- *
- * @author Javy
- */
-
-
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
@@ -17,6 +11,13 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.border.Border;
+
+/**
+ *
+ * @author Javy
+ */
+
+
  
 
 public class ImagenFondo implements Border{

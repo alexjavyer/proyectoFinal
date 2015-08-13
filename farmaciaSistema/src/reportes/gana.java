@@ -5,7 +5,7 @@
 package reportes;
 
 import interfaces.conexion;
-import interfaces.menu;
+import interfaces.menu1;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -183,7 +183,7 @@ public class gana extends javax.swing.JInternalFrame {
          gana();
          reporte();
          String dir="ventaDelDia";  
-         menu.visualizador(dir1+dir+".pdf"); 
+         menu1.visualizador(dir1+dir+".pdf"); 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -5,7 +5,7 @@
 package reportes;
 
 import interfaces.conexion;
-import interfaces.menu;
+import interfaces.menu1;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -201,7 +201,7 @@ public class facturasEntreDosFechasSuma extends javax.swing.JInternalFrame {
          facturasEntreDosFechasSuma();
          reporte();
          String dir="facturaEntreDosFechas";  
-         menu.visualizador(dir1+dir+".pdf"); 
+         menu1.visualizador(dir1+dir+".pdf"); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

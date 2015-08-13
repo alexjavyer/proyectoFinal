@@ -43,7 +43,7 @@ public class ingresoAlSistema extends javax.swing.JFrame {
     conexion cc=new conexion();
     Connection cn= cc.conectar();
     String sql="";
-  
+  usuarios usu = new usuarios();
     sql="select * from USUARIOS";
 
         try {
@@ -51,10 +51,10 @@ public class ingresoAlSistema extends javax.swing.JFrame {
             ResultSet rs=psd.executeQuery(sql);
             
             while(rs.next()){  
-             if(txtUsuario.getText().equals(rs.getString("CI_USU"))&& txtClave.getText().equals(rs.getString("CLA_USU"))){
+             if(txtUsuario.getText().equals(rs.getString("CI_USU"))&& txtClave.getText().equals(usu.Desencriptar(rs.getString("CLA_USU")))){
                  if(rs.getString("TIP_USU").equals("ADMINISTRADOR"))
                  {
-                 menu mn=new menu();
+                 menu1 mn=new menu1();
                  mn.setExtendedState(MAXIMIZED_BOTH);
                  mn.setVisible(true);
                  this.dispose();
@@ -66,7 +66,7 @@ public class ingresoAlSistema extends javax.swing.JFrame {
                 }
                  else if(rs.getString("TIP_USU").equals("FARMACEUTICO"))
                  {
-                 menu mn=new menu();
+                 menu1 mn=new menu1();
                  mn.setExtendedState(MAXIMIZED_BOTH);
                  mn.setVisible(true);
                  this.dispose(); 
@@ -78,7 +78,7 @@ public class ingresoAlSistema extends javax.swing.JFrame {
                  }
                  else if(rs.getString("TIP_USU").equals("BODEGUERO"))
                  {
-                 menu mn=new menu();
+                 menu1 mn=new menu1();
                  mn.setExtendedState(MAXIMIZED_BOTH);
                  mn.setVisible(true);
                  this.dispose(); 

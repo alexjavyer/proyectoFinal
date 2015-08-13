@@ -579,7 +579,7 @@ public class pedidos extends javax.swing.JInternalFrame {
     private void jbtDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtDetallesActionPerformed
         // TODO add your handling code here:
         detalles_pedidos pe=new detalles_pedidos();
-        menu.jDesktopPane1.add(pe);
+        menu1.jDesktopPane1.add(pe);
         pe.setVisible(true);
         pe.show();
     }//GEN-LAST:event_jbtDetallesActionPerformed
